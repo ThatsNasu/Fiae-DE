@@ -68,6 +68,10 @@ form > input[type="submit"]:hover {
 	background-color: #e8e8e8;
 }
 
+.childMenuItem:hover {
+	background-color: #d6d6d6;
+}
+
 .banner {
 	background-color: #e8e8e8;
 }

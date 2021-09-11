@@ -64,6 +64,10 @@ form > input[type="submit"]:hover {
 	background-color: #242424;
 }
 
+.childMenuItem:hover {
+	background-color: #363636;
+}
+
 .subcategories {
 	border-bottom-color: #99ffff;
 }

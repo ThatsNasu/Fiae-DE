@@ -6,6 +6,10 @@
 	box-sizing: border-box;
 }
 
+body {
+	font-size: 12pt;
+}
+
 a {
     text-decoration: none;
 }
@@ -15,6 +19,7 @@ header {
     min-width: 1400px;
     min-height: 200px;
     margin: auto;
+	margin-top: 75px;
 }
 
 nav {
@@ -78,8 +83,14 @@ form > input[type="submit"] {
 	width: auto;
 }
 
+.profileMenu {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	text-align: right;
+}
+
 .loginarea {
-    min-height: 50px;
     width: 100%;
     text-align: right;
 }
@@ -138,6 +149,7 @@ form > input[type="submit"] {
 	border-top: none;
 	text-align: left;
 	min-width: 100%;
+	margin-top: -4px;
 	z-index: 2;
 }
 
@@ -188,10 +200,6 @@ footer > div {
 	min-width: 177px;
 	display: inline-block;
 	vertical-align: top;
-}
-
-footer > div:not(:first-child) {
-	margin-left: -5px;
 }
 
 footer > div > span {

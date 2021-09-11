@@ -1,19 +1,5 @@
 <?php
-    if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-        ?>
-            <div class="headline">
-                Unterrichtsmaterialien
-            </div>
-            <div class="subcategories">
-                <?php
-                    $links = $dbmanager->getChildItems(3);
-                    for($i = 0; $i < sizeof($links); $i++) {
-                        echo '<div class="subcategory"><a href="'.$links[$i]['target'].'">'.$links[$i]['value'].'</a></div>';
-                    }
-                ?>
-            </div>
-        <?php
-    } else {
+    if(!isset($_SESSION['user']) || empty($_SESSION['user'])) {
         ?>
             <article>
                 <div class="headline">Sorry, aber...</div>
@@ -23,4 +9,14 @@
         header("refresh:5; url=../");
     }
 ?>
-
+<div class="headline">
+    Unterrichtsmaterialien
+</div>
+<div class="subcategories">
+    <?php
+        $links = $dbmanager->getChildItems(3);
+        for($i = 0; $i < sizeof($links); $i++) {
+            echo '<div class="subcategory"><a href="'.$links[$i]['target'].'">'.$links[$i]['value'].'</a></div>';
+        }
+    ?>
+</div>

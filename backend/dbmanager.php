@@ -78,5 +78,29 @@
 			$result = $stmt->fetch();
 			return $result;
 		}
+
+		public function loadMetas() {
+			$this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM metadata");
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+
+		public function getFooterNav() {
+			$this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM footernav WHERE parent = 0");
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+
+		public function getFooterChilds($parentNodeID) {
+			$this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM footernav WHERE parent = ?");
+			$stmt->execute(array($parentNodeID));
+			$result = $stmt->fetchAll();
+			return $result;
+		}
 	}
 ?>

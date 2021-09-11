@@ -1,14 +1,28 @@
 <footer class="footer">
-    <div >
-        <span>FIAE D</span>
-        <a href="../FiaeD/Stundenplan">Stundenplan</a>
-    </div>
-    <div>
-        <span>FIAE E</span>
-        <a href="../FiaeE/Stundenplan">Stundenplan</a>
-    </div>
-    <div>
-        <span>Legal</span>
-        <a href="../Impressum">Impressum</a>
-    </div>
+    <?php
+        $footernav = $dbmanager->getFooterNav();
+        for($i = 0; $i < sizeof($footernav); $i++) {
+            if($footernav[$i]['requiresLogin'] == 0) {
+                echo '<div><span>'.$footernav[$i]['value'].'</span>';
+                $childs = $dbmanager->getFooterChilds($footernav[$i]['id']);
+                if(sizeof($childs) != 0) {
+                    for($j = 0; $j < sizeof($childs); $j++) {
+                        echo '<a href="'.$childs[$j]['target'].'">'.$childs[$j]['value'].'</a>';
+                    }
+                }
+                echo '</div>';
+            } else {
+                if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+                    echo '<div><span>'.$footernav[$i]['value'].'</span>';
+                    $childs = $dbmanager->getFooterChilds($footernav[$i]['id']);
+                    if(sizeof($childs) != 0) {
+                        for($j = 0; $j < sizeof($childs); $j++) {
+                            echo '<a href="'.$childs[$j]['target'].'">'.$childs[$j]['value'].'</a>';
+                        }
+                    }
+                    echo '</div>';
+                }
+            }
+        }
+    ?>
 </footer>
