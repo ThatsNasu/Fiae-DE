@@ -1,0 +1,32 @@
+.headline {
+    font-weight: bold;
+    font-size: 16pt;
+    padding-bottom: 25px;;
+}
+
+.block {
+    padding: 50px;
+}
+
+.block_headline {
+    padding: 20px;
+    padding-top: 0px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid;
+    border-bottom-color: #008f5f;
+}
+
+.step {
+    padding: 10px;
+}
+
+.highlight {
+    font-style: italic;
+    display: inline;
+}
+
+img {
+    margin: 0px auto;
+    padding-top: 7px;
+    padding-bottom: 20px;
+}

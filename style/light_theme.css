@@ -1,0 +1,99 @@
+a {
+	color: #006666;
+}
+
+body {
+	background-color: #fafafa;
+	background: -webkit-linear-gradient(to right, #fafafa, #e8e8e8);
+	background: linear-gradient(to right, #fafafa, #e8e8e8);
+}
+
+nav {
+	background-color: #d6d6d6;
+	border-bottom-color: #006666;
+	border-top-color: #006666;
+}
+
+main{
+	background-color: #c4c4c4;
+	color: #242424;
+}
+
+.headline {
+	border-bottom-color: #006666;
+}
+
+.subcategories {
+	border-bottom-color: #006666;
+}
+
+form > input, form > textarea {
+	border-color: #006666;
+	background-color: #e8e8e8;
+	color: #006666;
+}
+
+form > input:hover, form > textarea:hover {
+	border-color: #006666dd;
+}
+
+form > input[type="submit"]{
+	background-color: #e8e8e8;
+	color: #006666;
+}
+
+form > input[type="submit"]:hover {
+	background-color: #006666dd;
+	color: #121212;
+}
+
+.loginarea {
+	color: #121212;
+}
+
+.mainMenuButton {
+	color: #006666;
+}
+
+.mainMenuButton:hover {
+	background-color: #b3b3b3;
+}
+
+.mainMenuButton > a {
+	color: #242424;
+}
+
+.mainMenuButton:hover > div {
+	border-color: #006666;
+	background-color: #e8e8e8;
+}
+
+.banner {
+	background-color: #e8e8e8;
+}
+
+.banner > .headline {
+	background-color: #006666;
+	color: #fafafa;
+}
+
+footer {
+	background-color: #e8e8e8;
+	color: #006666;
+}
+
+footer > div:hover {
+	background-color: #d6d6d6;
+}
+
+footer > div > span {
+	border-bottom: 1px solid #242424;
+}
+
+footer > div > a {
+	color: #242424;
+}
+
+footer > div > a:hover {
+	color: #006666;
+}
