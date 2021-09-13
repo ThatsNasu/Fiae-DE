@@ -14,7 +14,7 @@
 </div>
 <div class="subcategories">
     <?php
-        $links = $dbmanager->getChildItems(3);
+        $links = $dbmanager->getNavigationItems(3);
         for($i = 0; $i < sizeof($links); $i++) {
             echo '<div class="subcategory"><a href="'.$links[$i]['target'].'">'.$links[$i]['value'].'</a></div>';
         }

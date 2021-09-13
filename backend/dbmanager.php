@@ -55,19 +55,16 @@
 			return $result['name'];
 		}
 
-		public function getMainMenuItems() {
+		public function getNavigationItems($parentID = 0) {
 			$this->connect();
-			$stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = 0");
-			$stmt->execute();
-			$result = $stmt->fetchAll();
-			return $result;
-		}
-
-		public function getChildItems($parentNodeID) {
-			$this->connect();
-			$stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = ?");
-			$stmt->execute(array($parentNodeID));
-			$result = $stmt->fetchAll();
+			if($parentID != 0) {
+				$stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = ?");
+				$stmt->execute(array($parentID));
+			} else {
+				$stmt = $this->pdo->prepare("SELECT * FROM navigation");
+				$stmt->execute();
+			}
+			$result = $stmt->fetchALL();
 			return $result;
 		}
 
