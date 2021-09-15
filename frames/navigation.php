@@ -2,12 +2,11 @@
     require_once('./frames/menuitem.php');
     class Navigation {
         private $mainMenuItems;
-        private $userIsLoggedIn;
+        private $userIsLoggedIn = false;
 
         public function __construct($dbresult) {
             $this->mainMenuItems = array();
             $this->parseItemList($dbresult);
-            $this->userIsLoggedIn = false;
             if(isset($_SESSION['user']) && !empty($_SESSION['user'])) $this->userIsLoggedIn = true;
         }
 
@@ -20,13 +19,17 @@
                     $item = new MenuItem($element['id'], $element['target'], $element['value'], $requiresLogin, true);
                     array_push($this->mainMenuItems, $item);
                 } else {
-                    $item = new MenuItem($element['id'], $element['target'], $element['value'], $requiresLogin, false);
-                    $this->mainMenuItems[$element['parent']-1]->addChild($item);
+                    foreach($this->mainMenuItems as $menuItem) {
+                        if($menuItem->getID() == $element['parent']) {
+                            $item = new MenuItem($element['id'], $element['target'], $element['value'], $requiresLogin, false);
+                            $menuItem->addChild($item);
+                        }
+                    }
                 }
             }
         }
 
-        public function getNavigation() {
+        public function getMainNavigation() {
             $build = '<nav>';
             foreach($this->mainMenuItems as $mainMenuItem) {
                 if(!$mainMenuItem->requiresLogin()) {
@@ -69,6 +72,47 @@
             }
             $build .= '</nav>';
             return $build;
+        }
+
+        public function getFooterNavigation() {
+            $build = '<footer>';
+            foreach($this->mainMenuItems as $mainMenuItem) {
+                if(!$mainMenuItem->requiresLogin()) {
+                    $build .= '<div><span>';
+                    $build .= $mainMenuItem->getValue();
+                    $build .= '</span>';
+                    if(sizeof($mainMenuItem->getChildren()) != 0) {
+                        foreach($mainMenuItem->getChildren() as $child) {
+                            $build .= '<a href="';
+                            $build .= $child->getTarget();
+                            $build .= '">';
+                            $build .= $child->getValue();
+                            $build .= '</a>';
+                        }
+                    }
+                    $build .= '</div>';
+                } elseif ($this->userIsLoggedIn) {
+                    $build .= '<div><span>';
+                    $build .= $mainMenuItem->getValue();
+                    $build .= '</span>';
+                    if(sizeof($mainMenuItem->getChildren()) != 0) {
+                        foreach($mainMenuItem->getChildren() as $child) {
+                            $build .= '<a href="';
+                            $build .= $child->getTarget();
+                            $build .= '">';
+                            $build .= $child->getValue();
+                            $build .= '</a>';
+                        }
+                    }
+                    $build .= '</div>';
+                }
+            }
+            $build .= '</nav>';
+            return $build;
+        }
+
+        public function getMainMenuItems() {
+            return $this->mainMenuItems;
         }
     }
 ?>

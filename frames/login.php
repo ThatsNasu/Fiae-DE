@@ -1,7 +1,7 @@
 <div class="loginarea">
 	<?php
 		if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-			echo 'Willkommen '.$_SESSION['user'].' <a href="./?logout">Logout</a>';
+			echo 'Willkommen '.$_SESSION['user'].' <a href="../?logout">Logout</a>';
 		} else {
 			?>
 				<form action="./" method="POST">

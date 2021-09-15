@@ -14,6 +14,9 @@
 	//global objects
 	$dbmanager = new DBManager($host, $database, $login, $pass);
 
+	//global variables
+	
+
 	/*
 		create missing tables and initialize it
 		check user privileges and allow / deny access
@@ -38,7 +41,8 @@
 	*/
 
 	//page requirements
-	$navigation = new Navigation($dbmanager->getNavigationItems());
+	$navigation = new Navigation($dbmanager->getNavigationItems("navigation"));
+	$footer = new Navigation($dbmanager->getNavigationItems("footernav"));
 
 
 
@@ -62,7 +66,7 @@
 	?>
 		<div class="betawarning">Caution: this is the development branch. For the release version of this webpage visit <a href="https://fiaede.dasnasu.bitbite.dev/">https://fiaede.dasnasu.bitbite.dev/</a></div>
 	<?php
-	echo $navigation->getNavigation();
+	echo $navigation->getMainNavigation();
 	require('./frames/content.php');
-	require('./frames/footer.php');
+	echo $footer->getFooterNavigation();
 ?>

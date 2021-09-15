@@ -55,15 +55,16 @@
 			return $result['name'];
 		}
 
-		public function getNavigationItems($parentID = 0) {
+		public function getNavigationItems($table, $parentID = 0) {
 			$this->connect();
 			if($parentID != 0) {
-				$stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = ?");
+				$stmt = $this->pdo->prepare("SELECT * FROM $table WHERE parent = ?");
 				$stmt->execute(array($parentID));
 			} else {
-				$stmt = $this->pdo->prepare("SELECT * FROM navigation");
+				$stmt = $this->pdo->prepare("SELECT * FROM $table");
 				$stmt->execute();
 			}
+			
 			$result = $stmt->fetchALL();
 			return $result;
 		}
@@ -80,22 +81,6 @@
 			$this->connect();
 			$stmt = $this->pdo->prepare("SELECT * FROM metadata");
 			$stmt->execute();
-			$result = $stmt->fetchAll();
-			return $result;
-		}
-
-		public function getFooterNav() {
-			$this->connect();
-			$stmt = $this->pdo->prepare("SELECT * FROM footernav WHERE parent = 0");
-			$stmt->execute();
-			$result = $stmt->fetchAll();
-			return $result;
-		}
-
-		public function getFooterChilds($parentNodeID) {
-			$this->connect();
-			$stmt = $this->pdo->prepare("SELECT * FROM footernav WHERE parent = ?");
-			$stmt->execute(array($parentNodeID));
 			$result = $stmt->fetchAll();
 			return $result;
 		}
