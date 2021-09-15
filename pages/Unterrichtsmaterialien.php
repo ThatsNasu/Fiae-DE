@@ -8,21 +8,24 @@
             </article>
         <?php
         header("refresh:5; url=../");
+    } else {
+        ?>
+        <div class="headline">
+            <?php
+                echo $pagehead;
+            ?>
+        </div>
+        <div class="subcategories">
+            <?php
+                foreach($navigation->getMainMenuItems() as $menuItem) {
+                    if($menuItem->getValue() == $pagehead) {
+                        foreach($menuItem->getChildren() as $child) {
+                            echo '<div class="subcategory"><a href="'.$child->getTarget().'">'.$child->getValue().'</a></div>';
+                        }
+                    }
+                }
+            ?>
+        </div>
+        <?php
     }
 ?>
-<div class="headline">
-    <?php
-        echo $pagehead;
-    ?>
-</div>
-<div class="subcategories">
-    <?php
-        foreach($navigation->getMainMenuItems() as $menuItem) {
-            if($menuItem->getValue() == $pagehead) {
-                foreach($menuItem->getChildren() as $child) {
-                    echo '<div class="subcategory"><a href="'.$child->getTarget().'">'.$child->getValue().'</a></div>';
-                }
-            }
-        }
-    ?>
-</div>

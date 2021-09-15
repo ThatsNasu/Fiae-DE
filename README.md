@@ -43,7 +43,6 @@ The development stage aswell as the production stage are hosted on my developmen
 * Object Oriented Navigation
 
 ### Upcoming:
-* Object Oriented Footer
 * Userprofile
 * Permissionsystem
 * File upload and download
