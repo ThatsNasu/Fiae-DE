@@ -63,9 +63,6 @@
 	</div>
 	<?php
 	require('./frames/header.php');
-	?>
-		<div class="betawarning">Caution: this is the development branch. For the release version of this webpage visit <a href="https://fiaede.dasnasu.bitbite.dev/">https://fiaede.dasnasu.bitbite.dev/</a></div>
-	<?php
 	echo $navigation->getMainNavigation();
 	require('./frames/content.php');
 	echo $footer->getFooterNavigation();
