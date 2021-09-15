@@ -2,6 +2,7 @@ body {
     background-color: #1a1a1a;
     background: -webkit-linear-gradient(to right, #050505, #202020);
     background: linear-gradient(to right, #050505, #202020);
+	color: #d6d6d6;
 }
 
 a {
