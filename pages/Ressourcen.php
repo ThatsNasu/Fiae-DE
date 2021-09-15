@@ -1,4 +1,5 @@
 <?php
+    $pagehead = "Ressourcen";
     if(!isset($_SESSION['user']) || empty($_SESSION['user'])) {
         ?>
             <article>
@@ -11,13 +12,18 @@
     }
 ?>
 <div class="headline">
-    Ressourcen
+    <?php
+        echo $pagehead;
+    ?>
 </div>
 <div class="subcategories">
     <?php
-        $links = $dbmanager->getChildItems(2);
-        for($i = 0; $i < sizeof($links); $i++) {
-            echo '<div class="subcategory"><a href="'.$links[$i]['target'].'">'.$links[$i]['value'].'</a></div>';
+        foreach($navigation->getMainMenuItems() as $menuItem) {
+            if($menuItem->getValue() == $pagehead) {
+                foreach($menuItem->getChildren() as $child) {
+                    echo '<div class="subcategory"><a href="'.$child->getTarget().'">'.$child->getValue().'</a></div>';
+                }
+            }
         }
     ?>
 </div>

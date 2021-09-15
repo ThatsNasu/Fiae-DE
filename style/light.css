@@ -6,6 +6,7 @@ body {
 	background-color: #fafafa;
 	background: -webkit-linear-gradient(to right, #fafafa, #e8e8e8);
 	background: linear-gradient(to right, #fafafa, #e8e8e8);
+	color: #242424;
 }
 
 nav {

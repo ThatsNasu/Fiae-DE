@@ -5,13 +5,17 @@
 	if(isset($_SESSION['user']) && !empty($_SESSION['user'])) header("refresh:1200; url=./?autologout");
 	if(!isset($_COOKIE['theme'])) setcookie('theme', 'light', time()+3600*24*30);
 	
-	//backend requirements
+	//requirements
 	require('./backend/databaselogin.php');
 	require('./backend/dbmanager.php');
+	require('./frames/navigation.php');
 
 
 	//global objects
 	$dbmanager = new DBManager($host, $database, $login, $pass);
+
+	//global variables
+	
 
 	/*
 		create missing tables and initialize it
@@ -28,6 +32,7 @@
 		accesscontrol to files
 		permission system
 		previous visited for users who logged in
+		maybe outsource impressum and old.php to database
 
 
 		//css stuff
@@ -36,6 +41,12 @@
 	*/
 
 	//page requirements
+	$navigation = new Navigation($dbmanager->getNavigationItems("navigation"));
+	$footer = new Navigation($dbmanager->getNavigationItems("footernav"));
+
+
+
+	//current
 	require('./frames/head.php');
 	?>
 	<div class="profileMenu">
@@ -52,7 +63,10 @@
 	</div>
 	<?php
 	require('./frames/header.php');
-	require('./frames/nav.php');
+	?>
+		<div class="betawarning">Caution: this is the development branch. For the release version of this webpage visit <a href="https://fiaede.dasnasu.bitbite.dev/">https://fiaede.dasnasu.bitbite.dev/</a></div>
+	<?php
+	echo $navigation->getMainNavigation();
 	require('./frames/content.php');
-	require('./frames/footer.php');
+	echo $footer->getFooterNavigation();
 ?>
