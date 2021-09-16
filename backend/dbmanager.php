@@ -39,20 +39,12 @@
 		    return $result[0];
 		}
 		
-		public function getUserIDByName($name) {
-		    $this->connect();
-			$stmt = $this->pdo->prepare("SELECT * FROM users WHERE login = ?");
-			$stmt->execute(array($name));
-			$result = $stmt->fetch();
-			return $result['id'];
-		}
-		
-		public function getUsernameByID($id) {
+		public function getUserByID($id) {
 		    $this->connect();
 			$stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
 			$stmt->execute(array($id));
 			$result = $stmt->fetch();
-			return $result['name'];
+			return $result;
 		}
 
 		public function getNavigationItems($table, $parentID = 0) {
@@ -82,6 +74,22 @@
 			$stmt = $this->pdo->prepare("SELECT * FROM metadata");
 			$stmt->execute();
 			$result = $stmt->fetchAll();
+			return $result;
+		}
+
+		public function getFileList($category, $subcategory) {
+			$this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM sharedfiles WHERE category = ? AND subcategory = ? ORDER BY creationtime DESC");
+			$stmt->execute(array($category, $subcategory));
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+
+		public function getFileByID($id) {
+			$this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM sharedfiles WHERE id = ?");
+			$stmt->execute(array($id));
+			$result = $stmt->fetch();
 			return $result;
 		}
 	}

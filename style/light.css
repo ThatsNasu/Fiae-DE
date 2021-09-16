@@ -82,6 +82,14 @@ form > input[type="submit"]:hover {
 	color: #fafafa;
 }
 
+.file {
+	border-color: #006666;
+}
+
+.file:not(:first-child):hover {
+	background-color: #d6d6d6;
+}
+
 footer {
 	background-color: #e8e8e8;
 	color: #006666;

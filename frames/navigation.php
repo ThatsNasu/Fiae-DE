@@ -11,21 +11,27 @@
         }
 
         private function parseItemList($dbresult) {
-            for($i = 0; $i < sizeof($dbresult); $i++) {
-                $element = $dbresult[$i];
+            foreach($dbresult as $element) {
                 $requiresLogin = false;
-                if($element['requiresLogin'] == 1) $requiresLogin = true;
                 if($element['parent'] == 0) {
+                    if($element['requiresLogin'] == 1) $requiresLogin = true;
                     $item = new MenuItem($element['id'], $element['target'], $element['value'], $requiresLogin, true);
                     array_push($this->mainMenuItems, $item);
                 } else {
-                    foreach($this->mainMenuItems as $menuItem) {
-                        if($menuItem->getID() == $element['parent']) {
-                            $item = new MenuItem($element['id'], $element['target'], $element['value'], $requiresLogin, false);
-                            $menuItem->addChild($item);
-                        }
-                    }
+                    $this->checkChild($this->mainMenuItems, $element);
                 }
+            }
+        }
+
+        public function checkChild($haystack, $needle) {
+            foreach($haystack as $listentry) {
+                $requiresLogin = false;
+                if($listentry->getID() == $needle['parent']) {
+                    if($needle['requiresLogin'] == 1) $requiresLogin = true;
+                    $item = new MenuItem($needle['id'], $needle['target'], $needle['value'], $requiresLogin, false);
+                    $listentry->addChild($item);
+                }
+                else $this->checkChild($listentry->getChildren(), $needle);
             }
         }
 
@@ -107,7 +113,7 @@
                     $build .= '</div>';
                 }
             }
-            $build .= '</nav>';
+            $build .= '</footer>';
             return $build;
         }
 
