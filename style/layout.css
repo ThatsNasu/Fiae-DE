@@ -192,6 +192,44 @@ form > input[type="submit"] {
 	padding: 10px;
 }
 
+.file {
+	width: 100%;
+	display: flex;
+	padding-bottom: 5px;
+	transition: background-color .2s 0s, text-decoration .2s 0s;
+}
+
+.file:first-child {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+.file > .columns {
+	font-weight: bold;
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+
+.file > .filename {
+	width: 60%;
+}
+
+.file > .creator {
+	min-width: 180px
+}
+
+.file > .date {
+	min-width: 15%
+}
+
+.file > .size {
+	min-width: 10%;
+}
+
+.file:not(:first-child):hover {
+	text-decoration: underline;
+}
+
 footer {
 	width: 1400px;
 	margin: auto;

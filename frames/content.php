@@ -1,18 +1,16 @@
 <main>
     <section>
-            <?php
-                if(isset($_GET['url']) && !empty($_GET['url'])) {
-					$url = explode("/", $_GET['url']);
-					if(file_exists('./pages/'.$url[0].'.php')) {
-						require('./pages/'.$url[0].'.php');
-					} else {
-						require('./pages/404.php');
-					}
+		<?php
+			if(isset($_GET['url']) && !empty($_GET['url'])) {
+				$url = explode("/", $_GET['url']);
+				if(file_exists('./pages/'.$url[0].'.php')) {
+					require('./pages/'.$url[0].'.php');
 				} else {
-					require('./pages/old.php');
+					require('./pages/404.php');
 				}
-            ?>
-			<article>
-        </article>
+			} else {
+				require('./pages/old.php');
+			}
+		?>
     </section>
 </main>
