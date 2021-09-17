@@ -1,17 +1,15 @@
 <?php
     class File {
         private $id;
-        private $catergory;
-        private $subcategory;
+        private $category;
         private $filename;
         private $creator;
         private $timestamp;
         private $filesize;
 
-        public function __construct($id, $category, $subcategory, $filename, $creator, $timestamp, $filesize) {
+        public function __construct($id, $category, $filename, $creator, $timestamp, $filesize) {
             $this->id = $id;
             $this->category = $category;
-            $this->subcategory = $subcategory;
             $this->filename = $filename;
             $this->creator = $creator;
             $this->timestamp = $timestamp;
@@ -24,10 +22,6 @@
 
         public function getCategory() {
             return $this->category;
-        }
-
-        public function getSubCategory() {
-            return $this->subcategory;
         }
 
         public function getFileName() {

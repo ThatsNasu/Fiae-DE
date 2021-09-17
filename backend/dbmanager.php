@@ -77,11 +77,19 @@
 			return $result;
 		}
 
-		public function getFileList($category, $subcategory) {
+		public function getFileList($category) {
 			$this->connect();
-			$stmt = $this->pdo->prepare("SELECT * FROM sharedfiles WHERE category = ? AND subcategory = ? ORDER BY creationtime DESC");
-			$stmt->execute(array($category, $subcategory));
+			$stmt = $this->pdo->prepare("SELECT * FROM sharedfiles WHERE category = ? ORDER BY creationtime DESC");
+			$stmt->execute(array($category));
 			$result = $stmt->fetchAll();
+			return $result;
+		}
+
+		public function getCategoryByName($name) {
+			$this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM categories WHERE title = ?");
+			$stmt->execute(array($name));
+			$result = $stmt->fetch();
 			return $result;
 		}
 
