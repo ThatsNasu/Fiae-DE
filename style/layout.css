@@ -224,6 +224,7 @@ form > input[type="submit"] {
 
 .file > .size {
 	min-width: 10%;
+	text-align: right;
 }
 
 .file:not(:first-child):hover {

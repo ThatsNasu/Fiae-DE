@@ -72,7 +72,7 @@
                         $build .= date($file->getTimestamp());
                         $build .= '</div>';
                         $build .= '<div class="size">';
-                        $build .= $file->getFilesize();
+                        $build .= number_format($file->getFilesize(), 0, ',', '.').' B';
                         $build .= '</div>';
                         $build .= '</div>';
                         echo $build;
