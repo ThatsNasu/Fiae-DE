@@ -47,14 +47,14 @@
                     <div class="filesize columns">Dateigr&ouml;&szlig;e</div>
                 </div>
                 <?php
-                    $dbdata = $dbmanager->getFileList($splits[0], $splits[1]);
+                    $dbdata = $dbmanager->getFileList($dbmanager->getCategoryByName($pagehead)['id']);
                     $filelist = array();
                     foreach($dbdata as $filemeta) {
                         $user = $dbmanager->getUserByID($filemeta['creator']);
                         if($user['nickname'] != "") $creator = $user['nickname'];
                         elseif($user['fullname'] != "") $creator = $user['fullname'];
                         else $creator = $user['login'];
-                        $file = new File($filemeta['id'], $filemeta['category'], $filemeta['subcategory'], $filemeta['filename'], $creator, $filemeta['creationtime'], $filemeta['size']);
+                        $file = new File($filemeta['id'], $filemeta['category'], $filemeta['filename'], $creator, $filemeta['creationtime'], $filemeta['size']);
                         array_push($filelist, $file);
                     }
 
@@ -72,7 +72,7 @@
                         $build .= date($file->getTimestamp());
                         $build .= '</div>';
                         $build .= '<div class="size">';
-                        $build .= $file->getFilesize();
+                        $build .= number_format($file->getFilesize(), 0, ',', '.').' B';
                         $build .= '</div>';
                         $build .= '</div>';
                         echo $build;
