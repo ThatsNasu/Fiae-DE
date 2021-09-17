@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<?php
-	require('./frames/header.php');
+	require('./frames/header.html');
 	?>
 		<div class="betawarning">Caution: this is the development branch. For the release version of this webpage visit <a href="https://fiaede.dasnasu.bitbite.dev/">https://fiaede.dasnasu.bitbite.dev/</a></div>
 	<?php
