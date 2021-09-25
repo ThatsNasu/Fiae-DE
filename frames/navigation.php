@@ -45,7 +45,7 @@
                     $build .= $mainMenuItem->getValue();
                     $build .= '</a>';
                     if(sizeof($mainMenuItem->getChildren()) != 0) {
-                        $build += '<div>';
+                        $build .= '<div>';
                         foreach($mainMenuItem->getChildren() as $child) {
                             $build .= '<div class="childMenuItem"><a href="';
                             $build .= $child->getTarget();
