@@ -84,7 +84,7 @@ article {
 	margin-left: 20px;
 }
 
-form > input, form > textarea {
+input, textarea {
 	padding: 5px 10px 5px 10px;
 	border-radius: 3px;
 	border: 1px solid;
@@ -94,14 +94,14 @@ form > input, form > textarea {
 	width: 200px;
 }
 
-form > textarea {
+textarea {
 	width: 100%;
 	min-width: 100%;
 	max-width: 100%;
 	min-height: 100%;
 }
 
-form > input[type="submit"] {
+input[type="submit"] {
 	cursor: pointer;
 	width: auto;
 }

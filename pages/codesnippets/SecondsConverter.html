@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            #convertedTime {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        Input a number to be converted into split times.
+        <input type="text" placeholder="e.g. 1234" id="timeInSeconds">
+        <div id="convertedTime">
+        </div>
+        <script>
+            const convert = function() {
+                var input = document.getElementById("timeInSeconds").value;
+                if(isNaN(input)) {
+                    document.getElementById("convertedTime").innerHTML = "Please input a valid number";
+                    return;
+                }
+                input = Math.floor(input);
+                var centuries = Math.floor(input/(60*60*24*30*12*100));
+                var decades = Math.floor((input-(centuries*60*60*24*360*100))/(60*60*24*30*12*10));
+                var years = Math.floor((input-(centuries*60*60*24*360*100)-(decades*60*60*24*360*10))/(60*60*24*30*12));
+                var months = Math.floor((input-(centuries*60*60*24*360*100)-(decades*60*60*24*360*10)-(years*60*60*24*360))/(60*60*24*30));
+                var days = Math.floor((input-(centuries*60*60*24*360*100)-(decades*60*60*24*360*10)-(years*60*60*24*360)-(months*60*60*24*30))/(60*60*24));
+                var hours = Math.floor((input-(centuries*60*60*24*360*100)-(decades*60*60*24*360*10)-(years*60*60*24*360)-(months*60*60*24*30)-(days*60*60*24))/(60*60));
+                var minutes = Math.floor((input-(centuries*60*60*24*360*100)-(decades*60*60*24*360*10)-(years*60*60*24*360)-(months*60*60*24*30)-(days*60*60*24)-(hours*60*60))/60);
+                var seconds = Math.floor(input-(centuries*60*60*24*360*100)-(decades*60*60*24*360*10)-(years*60*60*24*360)-(months*60*60*24*30)-(days*60*60*24)-(hours*60*60)-(minutes*60));
+                if(input != 0) {
+                    document.getElementById("convertedTime").innerHTML = input+" seconds are: "+centuries+" centuries, "+decades+" decades, "+years+" years, "+months+" months, "+days+" days, "+hours+" hours, "+minutes+" minutes and "+seconds+" seconds. Youre welcome.";
+                } else {
+                    document.getElementById("convertedTime").innerHTML = "0 seconds are: "+centuries+" centuries, "+decades+" decades, "+years+" years, "+months+" months, "+days+" days, "+hours+" hours, "+minutes+" minutes and "+seconds+" seconds. Youre welcome.";
+                }
+            }
+
+            document.getElementById("timeInSeconds").addEventListener('input', convert);
+        </script>
+    </body>
+</html>
