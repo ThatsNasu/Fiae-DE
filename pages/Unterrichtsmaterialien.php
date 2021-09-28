@@ -60,7 +60,7 @@
                     foreach($filelist as $file) {
                         $build = '<div class="file">';
                         $build .= '<div class="filename">';
-                        $build .= '<a download href="../pages/get.php?f='.$file->getID().'">';
+                        $build .= '<a download href="/pages/get.php?f='.$file->getID().'">';
                         $build .= $file->getFilename();
                         $build .= '</a>';
                         $build .= '</div>';
