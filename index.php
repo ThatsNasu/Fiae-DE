@@ -2,8 +2,9 @@
 <html lang="de">
 <?php
 	session_start();
-	if(isset($_SESSION['user']) && !empty($_SESSION['user'])) header("refresh:1200; url=./?autologout");
-	if(!isset($_COOKIE['theme'])) setcookie('theme', 'light', time()+3600*24*30);
+	if(isset($_SESSION['user']) && !empty($_SESSION['user'])) header("refresh:1200; url=/?autologout");
+	$cookieOptions = array('expires' => time()+3600*24*30, 'path' => '/', 'domain' => '.dasnasu.bitbite.dev');
+	if(!isset($_COOKIE['theme'])) setcookie('theme', 'light', $cookieOptions);
 	
 	//requirements
 	require('./backend/databaselogin.php');

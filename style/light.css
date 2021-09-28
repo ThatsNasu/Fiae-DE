@@ -28,22 +28,22 @@ main{
 	border-bottom-color: #006666;
 }
 
-form > input, form > textarea {
+input, textarea {
 	border-color: #006666;
 	background-color: #e8e8e8;
 	color: #006666;
 }
 
-form > input:hover, form > textarea:hover {
+input:hover, textarea:hover {
 	border-color: #006666dd;
 }
 
-form > input[type="submit"]{
+input[type="submit"]{
 	background-color: #e8e8e8;
 	color: #006666;
 }
 
-form > input[type="submit"]:hover {
+input[type="submit"]:hover {
 	background-color: #006666dd;
 	color: #121212;
 }

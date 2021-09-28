@@ -48,6 +48,11 @@ section {
 	padding: 50px;
 }
 
+article {
+	padding-left: 50px;
+	padding-right: 100px;
+}
+
 .headline {
 	padding: 20px;
 	padding-top: 0px;
@@ -57,11 +62,29 @@ section {
 	font-weight: bold;
 }
 
-.headline > .extension {
-	font-size: 14pt;
+.topic {
+	font-size: 13pt;
+	font-weight: bold;
+	padding-bottom: 10px;
 }
 
-form > input, form > textarea {
+.extension {
+	font-size: 13pt;
+	font-weight: normal;
+	padding-bottom: 5px;
+	text-decoration: underline;
+	font-style: italic;
+}
+
+.block {
+	margin-bottom: 25px;
+}
+
+.block > .content {
+	margin-left: 20px;
+}
+
+input, textarea {
 	padding: 5px 10px 5px 10px;
 	border-radius: 3px;
 	border: 1px solid;
@@ -71,14 +94,14 @@ form > input, form > textarea {
 	width: 200px;
 }
 
-form > textarea {
+textarea {
 	width: 100%;
 	min-width: 100%;
 	max-width: 100%;
 	min-height: 100%;
 }
 
-form > input[type="submit"] {
+input[type="submit"] {
 	cursor: pointer;
 	width: auto;
 }

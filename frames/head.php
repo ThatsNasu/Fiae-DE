@@ -29,7 +29,9 @@
     <script rel="javascript">
         function themeselect() {
             var value = document.getElementById('themeselection').value;
-            document.cookie = 'theme='+value+';';
+            var d = new Date();
+            d.setTime(d.getTime() + (30*24*60*60*1000));
+            document.cookie = 'theme='+value+';path=/;domain=.dasnasu.bitbite.dev;expires='+d.toUTCString()+';';
             location.reload();
         }
     </script>
