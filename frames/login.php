@@ -15,7 +15,7 @@
 			$data = $dbmanager->getLogin($_POST['user']);
 			if($data['pass'] === hash('sha256', $_POST['pass']) && $data['active'] == 1) {
 				$_SESSION['user'] = $_POST['user'];
-				if(isset($_GET) && isset($_GET['url']) && $_GET['url'] != "Logout") echo '<meta http-equiv="refresh" content="0; URL='.$_SERVER['HTTP_REFERER'].'">';
+				if(isset($_GET) && isset($_GET['url']) && $_GET['url'] != "Logout" && $_GET['url'] != "Loginerror") echo '<meta http-equiv="refresh" content="0; URL='.$_SERVER['HTTP_REFERER'].'">';
 				else echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/User/'.$_SESSION['user'].'">';
 			} elseif(!$data) {
 				echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/Loginerror?c=notcreated">';
