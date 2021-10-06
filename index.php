@@ -15,32 +15,6 @@
 	//global objects
 	$dbmanager = new DBManager($host, $database, $login, $pass);
 
-	//global variables
-	
-
-	/*
-		create missing tables and initialize it
-		check user privileges and allow / deny access
-		handle requests like exploding url on /, handle input parameters and such stuff
-		generate content for page
-
-
-		//content relevant stuff
-		put descriptions next to the sublinks in schoolingmaterials
-		filewalker for the ressources
-		filedownlad
-		fileupload with database update
-		accesscontrol to files
-		permission system
-		previous visited for users who logged in
-		maybe outsource impressum and old.php to database
-
-
-		//css stuff
-		enable theming in a way that users cann choose which theme to use instead of relying on the time -> done, need to be revisited after user profile
-		enable theming in a way that users can decide which themingcolor they want to use fpr accents and stuff like that
-	*/
-
 	//page requirements
 	$navigation = new Navigation($dbmanager->getNavigationItems("navigation"));
 	$footer = new Navigation($dbmanager->getNavigationItems("footernav"));
