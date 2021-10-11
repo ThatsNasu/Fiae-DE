@@ -1,14 +1,28 @@
-<div class="loginarea">
+<html>
+	<head>
+		<link href="/style/login.css" rel="stylesheet" />
+	</head>
 	<?php
 		if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 			echo 'Willkommen '.$_SESSION['user'].' <a href="../?logout">Logout</a>';
 		} else {
 			?>
-				<form method="POST">
-					<input type="text" placeholder="Username" required name="user">
-					<input type="password" placeholder="Password" required name="pass">
-					<input type="submit" value="Login">
-				</form>
+				<div class="login_required">
+					<div class="headline">
+						Sorry but...
+					</div>
+					<div class="extension">
+						...it is absolutely needed that you are logged in to view this page. If you don't have a login or don't know where to find it, reach out to DasNasu or AuroraIceStorm on the FIAE Discord.
+						If it should be the case that you found this page by accident, i have to tell you that this is a private website, not to meant viewed by the public, sorry. 
+					</div>
+					<div class="login">
+						<form method="post">
+							<input type="text" name="user" placeholder="Login" />
+							<input type="password" name="pass" placeholder="Password" />
+							<input type="submit" value="Login" />
+						</form>
+					</div>
+				</div>
 			<?php
 		}
 		if(isset($_POST['user']) && isset($_POST['pass']) && !empty($_POST['user']) && !empty($_POST['pass'])) {
@@ -19,8 +33,6 @@
 				else echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/User/'.$_SESSION['user'].'">';
 			} elseif(!$data) {
 				echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/Loginerror?c=notcreated">';
-			} elseif($data['active'] != 1) {
-				echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/Loginerror?c=inactive">';
 			} else {
 				echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/Loginerror?c=misstype">';
 			}
@@ -32,4 +44,4 @@
 			echo '<meta http-equiv="refresh" content="0; URL=https://dasnasu.bitbite.dev/Logout">';
 		}
 	?>
-</div>
+</html>

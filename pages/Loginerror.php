@@ -4,9 +4,6 @@
 <?php
     if(isset($_GET['c']) && !empty($_GET['c'])) {
         switch ($_GET['c']) {
-            case 'inactive':
-                echo '... your login seems to be not activated so far. Please try it again later, but if the error persists, feel free to reach out to our admin.';
-                break;
             case 'misstype':
                 echo '... you seem to have misstyped your login credentials, Go ahead and try again please.';
                 break;
