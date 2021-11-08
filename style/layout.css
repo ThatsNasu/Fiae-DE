@@ -36,12 +36,34 @@ nav {
 	gap: 3px;
 }
 
+.linkage_container {
+	margin: auto;
+	margin-top: 15px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 1400px;
+    min-width: 1400px;
+}
+
+.linkage_container > a {
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	align-content: center;
+}
+
+.linkage_container > a > img {
+	vertical-align: middle;
+}
+
 main {
 	width: 1400px;
 	margin: auto;
 	position: relative;
 	overflow: hidden;
-	margin-top: 25px;
+	margin-top: 15px;
 }
 
 section {
@@ -146,6 +168,14 @@ input[type="submit"] {
     top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+.login_required {
+    margin-top: 100px;
+    max-width: 1000px;
+    min-height: 500px;
+	margin: auto;
+	margin-top: 75px;
 }
 
 .mainMenuButton {

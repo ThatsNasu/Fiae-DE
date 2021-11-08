@@ -8,6 +8,7 @@
 
 	// GLOBAL VARIABLES / OBJECTS
 	$dbmanager = new DBManager($host, $database, $login, $pass);
+	require_once('./frames/head.php');
 	if(sizeof($_SESSION) === 0) {
 		require('./frames/login.php');
 	} else {
@@ -20,7 +21,6 @@
 		$navigation = new Navigation($dbmanager->getNavigationItems("navigation"));
 		$footer = new Navigation($dbmanager->getNavigationItems("footernav"));
 
-		require_once('./frames/head.php');
 		echo '<div class="profileMenu">';
 			require('./frames/login.php'); ?>
 				<div class="themeselector">
@@ -34,6 +34,7 @@
 		require_once('./frames/header.html');
 		echo '<div class="betawarning">Caution: this is the development branch. For the release version of this webpage visit <a href="https://fiaede.dasnasu.bitbite.dev/">https://fiaede.dasnasu.bitbite.dev/</a></div>';
 		echo $navigation->getMainNavigation();
+		require('./frames/linkage.html');
 		require('./frames/content.php');
 		echo $footer->getFooterNavigation();
 	}
