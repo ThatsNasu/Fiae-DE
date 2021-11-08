@@ -47,6 +47,14 @@
 			return $result;
 		}
 
+		public function getUserByName($name) {
+		    $this->connect();
+			$stmt = $this->pdo->prepare("SELECT * FROM users WHERE login = ?");
+			$stmt->execute(array($name));
+			$result = $stmt->fetch();
+			return $result;
+		}
+
 		public function getNavigationItems($table, $parentID = 0) {
 			$this->connect();
 			if($parentID != 0) {
@@ -99,6 +107,14 @@
 			$stmt->execute(array($id));
 			$result = $stmt->fetch();
 			return $result;
+		}
+
+		public function insertNewFile($filename, $diskpath, $category, $filesize, $creator) {
+			$this->connect();
+			$stmt = $this->pdo->prepare("INSERT INTO sharedfiles (category, filename, diskpath, creator, size) VALUES (?, ?, ?, ?, ?)");
+			$userid = $this->getUserByName($creator)['id'];
+			$categoryid = $this->getCategoryByName($category)['id'];
+			$stmt->execute(array($categoryid, $filename, $diskpath, $userid, $filesize));
 		}
 	}
 ?>
