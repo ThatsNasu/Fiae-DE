@@ -6,10 +6,12 @@
         private $creator;
         private $timestamp;
         private $filesize;
+        private $diskpath;
 
-        public function __construct($id, $category, $filename, $creator, $timestamp, $filesize) {
+        public function __construct($id, $category, $diskpath, $filename, $creator, $timestamp, $filesize) {
             $this->id = $id;
             $this->category = $category;
+            $this->diskpath = $diskpath;
             $this->filename = $filename;
             $this->creator = $creator;
             $this->timestamp = $timestamp;
@@ -22,6 +24,10 @@
 
         public function getCategory() {
             return $this->category;
+        }
+
+        public function getDiskpath() {
+            return $this->diskpath;
         }
 
         public function getFileName() {

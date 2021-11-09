@@ -1,4 +1,5 @@
 <?php
+    ini_set('max_execution_time', '-1');
 	require_once($_SERVER['DOCUMENT_ROOT'].'/backend/databaselogin.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/backend/dbmanager.php');
     $dbmanager = new DBManager($host, $database, $login, $pass);

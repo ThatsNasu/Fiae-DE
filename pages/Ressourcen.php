@@ -44,7 +44,7 @@
                     if($user['nickname'] != "") $creator = $user['nickname'];
                     elseif($user['fullname'] != "") $creator = $user['fullname'];
                     else $creator = $user['login'];
-                    $file = new File($filemeta['id'], $filemeta['category'], $filemeta['filename'], $creator, $filemeta['creationtime'], $filemeta['size']);
+                    $file = new File($filemeta['id'], $filemeta['category'], $filemeta['diskpath'], $filemeta['filename'], $creator, $filemeta['creationtime'], $filemeta['size']);
                     array_push($filelist, $file);
                 }
 
