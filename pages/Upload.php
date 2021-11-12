@@ -33,6 +33,10 @@
 </div>
 <article>
     Depending on filsize and internet connection, fileuploads can take up some time. Please be patient and keep this site open until you got the response from the server. Feel free to use this site in a parallel tab.
+    <div class="betawarning">
+        Please make sure to not Upload any files that are already on the server, to save diskspace and traffic. Bandwidth doesn't grow on trees you know. If you don't know in which category you should put a certain file,
+        feel free to ask DasNasu for some advice, or to add a new category if needed!
+    </div>
     <form action="send" method="post" enctype="multipart/form-data" onChange="toggleCategories();">
         <select name="categories" id="categories">
             <option value="Ressourcen">Ressourcen</option>
@@ -54,7 +58,9 @@
             <option value="BGP-QM">BGP-QM</option>
             <option value="ITT-PC">ITT-PC</option>
             <option value="LAT-LAT">LAT-LAT</option>
-            <option value="ITT-Net">ITT-Net</option>
+            <option value="ITS-Net">ITS-Net</option>
+            <option value="BGP-BWL">BGP-BWL</option>
+            <option value="ITT-IS">ITT-IS</option>
         </select>
         <select name="operatingsystems" class="toggleshow" id="operatingsystems">
             <option selected value="Arch Linux">Arch Linux</option>
