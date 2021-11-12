@@ -24,15 +24,15 @@
 		if($data['pass'] === hash('sha256', $_POST['pass']) && $data['active'] == 1) {
 			$_SESSION['user'] = $_POST['user'];
 			if(isset($_GET) && isset($_GET['url']) && $_GET['url'] != "Logout" && $_GET['url'] != "Loginerror") echo '<meta http-equiv="refresh" content="0; URL='.$_SERVER['HTTP_REFERER'].'">';
-			else echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.dasnasu.bitbite.dev/User/'.$_SESSION['user'].'">';
+			else echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.bitbite.dev/User/'.$_SESSION['user'].'">';
 		} elseif(!$data) {
-			echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.dasnasu.bitbite.dev/Loginerror?c=notcreated">';
+			echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.bitbite.dev/Loginerror?c=notcreated">';
 		} else {
-			echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.dasnasu.bitbite.dev/Loginerror?c=misstype">';
+			echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.bitbite.dev/Loginerror?c=misstype">';
 		}
 	} elseif(isset($_GET['autologout'])) {
 		session_destroy();
-		echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.dasnasu.bitbite.dev/Logout?c=auto">';
+		echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.bitbite.dev/Logout?c=auto">';
 	} elseif(isset($_GET['logout'])) {
 		session_destroy();
 		echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.dasnasu.bitbite.dev/Logout">';

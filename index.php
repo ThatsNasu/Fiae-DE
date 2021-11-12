@@ -13,7 +13,7 @@
 		require('./frames/login.php');
 	} else {
 		if(isset($_SESSION['user']) && !empty($_SESSION['user'])) header("refresh:1200; url=/?autologout");
-		$cookieOptions = array('expires' => time()+3600*24*30, 'path' => '/', 'domain' => '.dasnasu.bitbite.dev');
+		$cookieOptions = array('expires' => time()+3600*24*30, 'path' => '/', 'domain' => '.fiaede.bitbite.dev');
 		if(!isset($_COOKIE['theme'])) setcookie('theme', 'light', $cookieOptions);
 
 		require_once('./frames/navigation.php');
