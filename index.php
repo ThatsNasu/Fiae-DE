@@ -5,6 +5,7 @@
 	// GLOBAL REQUIREMENTS
 	require_once('./backend/databaselogin.php');
 	require_once('./backend/dbmanager.php');
+	require_once("./backend/scssAutoCompiler.php");
 
 	// GLOBAL VARIABLES / OBJECTS
 	$dbmanager = new DBManager($host, $database, $login, $pass);
@@ -32,7 +33,7 @@
 				</div>
 			</div><?php
 		require_once('./frames/header.html');
-		
+
 		echo $navigation->getMainNavigation();
 		require('./frames/linkage.html');
 		require('./frames/content.php');
