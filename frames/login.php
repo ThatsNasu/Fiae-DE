@@ -35,6 +35,6 @@
 		echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.bitbite.dev/Logout?c=auto">';
 	} elseif(isset($_GET['logout'])) {
 		session_destroy();
-		echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.dasnasu.bitbite.dev/Logout">';
+		echo '<meta http-equiv="refresh" content="0; URL=https://fiaede.bitbite.dev/Logout">';
 	}
 ?>
