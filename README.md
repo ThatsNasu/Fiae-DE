@@ -35,17 +35,17 @@ After releasing the first ever public version of this webpage, I created this re
 You may be stumbling over some code that references files not provided in this repository. I did not provide this files since they contain sensible information like database logins or userdata
 
 ## Live versions:
-The development stage aswell as the production stage are hosted on my development webserver at my home, since I didn't want to bother our mainserver with this sideproject. If you are interested in taking a look on either of them, feel free to follow the links to [the poduction stage](https://fiaede.dasnasu.bitbite.dev) or [the development stage](https://dasnasu.bitbite.dev).
+The development stage aswell as the production stage are hosted on my development webserver at my home, since I didn't want to bother our mainserver with this sideproject. If you are interested in taking a look on either of them, feel free to follow the links to [the poduction stage](https://fiaede.bitbite.dev) or [the development stage](https://beta.fiaede.bitbite.dev).
 
 ## Implemented and upcoming features:
 ### Implemented:
 * Selectable theming
 * Object Oriented Navigation
+* File upload and download
 
 ### Upcoming:
 * Userprofile
 * Permissionsystem
-* File upload and download
 * Editable elements using permission system
 * Uniform page design
 * Mobile optimizations
