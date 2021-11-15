@@ -24,6 +24,11 @@
             $filename = basename($_FILES['file']['name']);
             
             $dbmanager->insertNewFile($filename, $base, $_POST['materials'], $_FILES['file']['size'], $_SESSION['user']);
+        } elseif($_POST['categories'] == 'Lernerfolgskontrollen') {
+            $base .= "Lernerfolgskontrollen/";
+            $filename = basename($_FILES['file']['name']);
+            
+            $dbmanager->insertNewFile($filename, $base, "Lernerfolgskontrollen", $_FILES['file']['size'], $_SESSION['user']);
         } else {
             echo 'Something went wrong horrifically';
             return;

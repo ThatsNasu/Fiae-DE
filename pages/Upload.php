@@ -2,7 +2,10 @@
     function toggleCategories() {
         var select = document.getElementById("categories");
         var resources = document.getElementById("resources");
-        if(select.value == "Ressourcen") {
+        if(select.value == "Lernerfolgskontrollen") {
+            document.getElementById("resources").style.display = "none";
+            document.getElementById("materials").style.display = "none";
+        } else if(select.value == "Ressourcen") {
             document.getElementById("resources").style.display = "inline";
             document.getElementById("materials").style.display = "none";
             if(resources.value == "Buecher") {
@@ -41,6 +44,7 @@
         <select name="categories" id="categories">
             <option value="Ressourcen">Ressourcen</option>
             <option value="Unterrichtsmaterialien">Unterrichtsmaterialien</option>
+            <option value="Lernerfolgskontrollen">Lernerfolgskontrollen</option>
         </select>
         <select name="resources" class="toggleshow" id="resources">
             <option selected value="Buecher">B&uuml;cher</option>
@@ -92,13 +96,4 @@
         <input type="file" name="file" style="min-width: 600px"/>
         <input type="submit" value="Upload" />
     </form>
-    <?php
-        if(isset($_POST['category'])) {
-            echo $_POST['category'].'<br />';
-            echo $_POST['resources'].'<br />';
-            echo $_POST['materials'].'<br />';
-            echo $_POST['operatingsystems'].'<br />';
-            var_dump($_FILES['file']);
-        }
-    ?>
 </article>
