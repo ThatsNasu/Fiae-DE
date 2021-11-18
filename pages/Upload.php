@@ -65,6 +65,7 @@
             <option value="ITS-Net">ITS-Net</option>
             <option value="BGP-BWL">BGP-BWL</option>
             <option value="ITT-IS">ITT-IS</option>
+            <option value="ITT-DTEL">ITT-DTEL</option>
         </select>
         <select name="operatingsystems" class="toggleshow" id="operatingsystems">
             <option selected value="Arch Linux">Arch Linux</option>
