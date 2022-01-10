@@ -8,10 +8,10 @@
         } else if(select.value == "Ressourcen") {
             document.getElementById("resources").style.display = "inline";
             document.getElementById("materials").style.display = "none";
-            if(resources.value == "Buecher") {
-                document.getElementById('operatingsystems').style.display = "none";
-            } else {
+            if(resources.value == "Betriebssysteme") {
                 document.getElementById('operatingsystems').style.display = "inline";
+            } else {
+                document.getElementById('operatingsystems').style.display = "none";
             }
         }
         if(select.value == "Unterrichtsmaterialien") {
@@ -49,6 +49,7 @@
         <select name="resources" class="toggleshow" id="resources">
             <option selected value="Buecher">B&uuml;cher</option>
             <option value="Betriebssysteme">Betriebssysteme</option>
+            <option value="Abschlusspruefungen">Abschlusspruefungen</option>
         </select>
         <select name="materials" class="toggleshow" id="materials">
             <option selected value="Allgemein">Allgemein</option>
@@ -66,6 +67,9 @@
             <option value="BGP-BWL">BGP-BWL</option>
             <option value="ITT-IS">ITT-IS</option>
             <option value="ITT-DTEL">ITT-DTEL</option>
+            <option value="BGP-KomITIL">BGP-KomITIL</option>
+            <option value="AnwP-DBSQL">AnwP-DBSQL</option>
+            <option value="FI-ITS-CySy">FI-ITS-CySy</option>
         </select>
         <select name="operatingsystems" class="toggleshow" id="operatingsystems">
             <option selected value="Arch Linux">Arch Linux</option>

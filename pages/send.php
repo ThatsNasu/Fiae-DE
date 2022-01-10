@@ -15,8 +15,13 @@
                 $filename = basename($_FILES['file']['name']);
                 
                 $dbmanager->insertNewFile($filename, $base, $_POST['operatingsystems'], $_FILES['file']['size'], $_SESSION['user']);
+            } elseif($_POST['resources'] == 'Abschlusspruefungen') {
+                $base .= "Abschlusspruefungen/";
+                $filename = basename($_FILES['file']['name']);
+                
+                $dbmanager->insertNewFile($filename, $base, "Abschlusspruefungen", $_FILES['file']['size'], $_SESSION['user']);
             } else {
-                echo 'Something went wrong horrifically';
+                echo 'Something went wrong horrifically while inserting resource';
                 return;
             }
         } elseif($_POST['categories'] == 'Unterrichtsmaterialien') {
