@@ -34,7 +34,7 @@
             background-color: dimgrey;
         }
         footer {
-            background-color: darkgrey;
+            background-color: orange;
         }
     </style>
     <head>
