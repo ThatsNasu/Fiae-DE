@@ -1,41 +1,77 @@
-<!DOCTYPE html>
-<html lang="de">
 <?php
-	session_start();
-	// GLOBAL REQUIREMENTS
-	require_once('./backend/databaselogin.php');
-	require_once('./backend/dbmanager.php');
+    require_once('backend/DatabaseManager.php');
+    require_once('backend/dblogin.php');
+    foreach(scandir('classes/') as $file) if($file != "." && $file != "..") require_once('classes/'.$file);
 
-	// GLOBAL VARIABLES / OBJECTS
-	$dbmanager = new DBManager($host, $database, $login, $pass);
-	require_once('./frames/head.php');
-	if(sizeof($_SESSION) === 0) {
-		require('./frames/login.php');
-	} else {
-		if(isset($_SESSION['user']) && !empty($_SESSION['user'])) header("refresh:1200; url=/?autologout");
-		$cookieOptions = array('expires' => time()+3600*24*30, 'path' => '/', 'domain' => '.dasnasu.bitbite.dev');
-		if(!isset($_COOKIE['theme'])) setcookie('theme', 'light', $cookieOptions);
+    $dbman = new DatabaseManager($host, $dbname, $login, $password);
 
-		require_once('./frames/navigation.php');
-
-		$navigation = new Navigation($dbmanager->getNavigationItems("navigation"));
-		$footer = new Navigation($dbmanager->getNavigationItems("footernav"));
-
-		echo '<div class="profileMenu">';
-			require('./frames/login.php'); ?>
-				<div class="themeselector">
-					<select name="themeselection" id="themeselection" onChange="themeselect();">
-						<option value="default" <?php if(!isset($_COOKIE['theme']) || $_COOKIE['theme'] == 'default') { echo 'selected'; } ?>>Default Theme (Switch on Day/Night)</option>
-						<option value="light" <?php if(isset($_COOKIE['theme']) && $_COOKIE['theme'] == 'light') { echo 'selected'; } ?>>Light Theme</option>
-						<option value="dark" <?php if(isset($_COOKIE['theme']) && $_COOKIE['theme'] == 'dark') { echo 'selected'; } ?>>Dark Theme</option>
-					</select>
-				</div>
-			</div><?php
-		require_once('./frames/header.html');
-		echo '<div class="betawarning">Caution: this is the development branch. For the release version of this webpage visit <a href="https://fiaede.dasnasu.bitbite.dev/">https://fiaede.dasnasu.bitbite.dev/</a></div>';
-		echo $navigation->getMainNavigation();
-		require('./frames/linkage.html');
-		require('./frames/content.php');
-		echo $footer->getFooterNavigation();
-	}
+    $navigation = new Navigation($dbman->getMenuEntries());
+    $contentManager = new ContentManager();
+    $footer = new Navigation($dbman->getMenuEntries());
 ?>
+<!DOCTYPE="html">
+<html>
+    <style>
+        * {
+            margin: 0px;
+        }
+        body {
+            background-color: gainsboro;
+        }
+        nav {
+            background-color: cadetblue;
+        }
+        header {
+            background-color: darkgray;
+        }
+        content {
+            background-color: darkseagreen;
+        }
+        section {
+            background-color: dimgray;
+        }
+        article {
+            background-color: dimgrey;
+        }
+        footer {
+            background-color: darkgrey;
+        }
+    </style>
+    <head>
+        <title>
+            <?php
+                if(!isset($_GET['url']) && !empty($_GET['url'])) {
+                    echo 'FIAE-DE - '.$_GET['url'];
+                } else {
+                    echo 'Welcome to FIAE-DE';
+                }
+            ?>
+        </title>
+    </head>
+
+    <body>
+        <nav>
+            <?php
+                echo $navigation->getTree();
+            ?>
+        </nav>
+        <header>
+            Welcome to FIAE-DE
+        </header>
+        <content>
+            <?php
+                echo $contentManager->loadContent();
+            ?>
+            <section>
+                <article>
+
+                </article>
+            </section>
+        </content>
+        <footer>
+            <?php
+                echo $footer->getTree();
+            ?>
+        </footer>
+    </body>
+</html>
