@@ -9,7 +9,7 @@
         }
 
         public function loadContent() {
-            return "asdf";
+            return "qwer";
         }
     }
 ?>
