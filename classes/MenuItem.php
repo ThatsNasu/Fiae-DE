@@ -64,15 +64,25 @@
             return true;
         }
 
-        public function showChildren($roottarget) {
+        public function showChildren($roottarget, $loggedin = false) {
             foreach($this->childs as $child) {
-                $this->child .= '<li class="'.$child->getCSSClass().'"style="padding-left: 10px; list-style: none;"><a href="'.$roottarget.$child->getTarget().'">'.$child->getValue().'</a>';
-                if($child->hasChildren()) {
-                    $this->child .= '<ul style="padding-left: 10px; list-style: none;">';
-                    $this->child .= $child->showChildren($roottarget.$child->getTarget());
-                    $this->child .= '</ul>';
+                if($loggedin && $child->requiresLogin()) {
+                    $this->child .= '<li><a href="'.$roottarget.$child->getTarget().'">'.$child->getValue().'</a>';
+                    if($child->hasChildren()) {
+                        $this->child .= '<ul>';
+                        $this->child .= $child->showChildren($roottarget.$child->getTarget());
+                        $this->child .= '</ul>';
+                    }
+                    $this->child .= '</li>';
+                } elseif(!$child->requiresLogin()) {
+                    $this->child .= '<li><a href="'.$roottarget.$child->getTarget().'">'.$child->getValue().'</a>';
+                    if($child->hasChildren()) {
+                        $this->child .= '<ul>';
+                        $this->child .= $child->showChildren($roottarget.$child->getTarget());
+                        $this->child .= '</ul>';
+                    }
+                    $this->child .= '</li>';
                 }
-                $this->child .= '</li>';
             }
 		    return $this->child;
 	    }

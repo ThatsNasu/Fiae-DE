@@ -39,9 +39,9 @@
             return $stmt->fetch();
         }
 
-        public function getMenuEntries() {
+        public function getMenuEntries($position) {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY target ASC");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE $position = 1 ORDER BY target ASC");
             $stmt->execute(array());
             return $stmt->fetchAll();
         }
