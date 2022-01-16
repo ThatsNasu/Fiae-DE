@@ -16,17 +16,30 @@
             return $this->roots;
         }
 
-        private function createTree() {
-            $this->tree = '<ul style="padding-left: 10px; list-style: none;">';
-            
+        /*
+            $loggedin specifies if a user is valid logged in;
+            currently hardcoded defaulted to true for debugging and display purposes.
+        */
+        private function createTree($loggedin = true) {
+            $this->tree = '<ul>';
             foreach($this->roots as $root) {
-                $this->tree .= '<li class="'.$root->getCSSClass().'"style style="padding-left: 10px; list-style: none;"><a href="'.$root->getTarget().'">'.$root->getValue().'</a>';
-                if($root->hasChildren()) {
-                    $this->tree .= '<ul style="padding-left: 10px; list-style: none;">';
-                    $this->tree .= $root->showChildren($root->getTarget());
-                    $this->tree .= '</ul>';
+                if($loggedin && $root->requiresLogin()) {
+                    $this->tree .= '<li><a href="'.$root->getTarget().'">'.$root->getValue().'</a>';
+                    if($root->hasChildren()) {
+                        $this->tree .= '<ul>';
+                        $this->tree .= $root->showChildren($root->getTarget(), $loggedin);
+                        $this->tree .= '</ul>';
+                    }
+                    $this->tree .= '</li>';
+                } elseif(!$root->requiresLogin()) {
+                    $this->tree .= '<li><a href="'.$root->getTarget().'">'.$root->getValue().'</a>';
+                    if($root->hasChildren()) {
+                        $this->tree .= '<ul>';
+                        $this->tree .= $root->showChildren($root->getTarget(), $loggedin);
+                        $this->tree .= '</ul>';
+                    }
+                    $this->tree .= '</li>';
                 }
-                $this->tree .= '</li>';
             }
             $this->tree .= '</ul>';
         }

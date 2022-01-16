@@ -1,42 +1,17 @@
 <?php
+    require_once('backend/scssAutoCompiler.php');
     require_once('backend/DatabaseManager.php');
     require_once('backend/dblogin.php');
     foreach(scandir('classes/') as $file) if($file != "." && $file != "..") require_once('classes/'.$file);
 
     $dbman = new DatabaseManager($host, $dbname, $login, $password);
 
-    $navigation = new Navigation($dbman->getMenuEntries());
+    $navigation = new Navigation($dbman->getMenuEntries("inMainNavigation"));
     $contentManager = new ContentManager();
-    $footer = new Navigation($dbman->getMenuEntries());
+    $footer = new Navigation($dbman->getMenuEntries("inFooter"));
 ?>
 <!DOCTYPE="html">
 <html>
-    <style>
-        * {
-            margin: 0px;
-        }
-        body {
-            background-color: gainsboro;
-        }
-        nav {
-            background-color: cadetblue;
-        }
-        header {
-            background-color: darkgray;
-        }
-        content {
-            background-color: darkseagreen;
-        }
-        section {
-            background-color: dimgray;
-        }
-        article {
-            background-color: dimgrey;
-        }
-        footer {
-            background-color: orange;
-        }
-    </style>
     <head>
         <title>
             <?php
@@ -47,30 +22,32 @@
                 }
             ?>
         </title>
-    </head>
+		<link rel="preload" as="font" href="https://fonts.gstatic.com/s/materialicons/v85/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2" type="font/woff2" crossorigin>
+		<link rel="stylesheet" href="/style/global.css" media="screen">
+		<link rel="stylesheet" href="/style/theme.css" media="screen">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap'" crossorigin>
+	</head>
 
     <body>
-        <nav>
-            <?php
-                echo $navigation->getTree();
-            ?>
-        </nav>
         <header>
-            Welcome to FIAE-DE
+            <span>
+                Welcome to FIAE-DE
+            </span>
+            <nav>
+                <?php
+                    echo $navigation->getTree('nav');
+                ?>
+            </nav>
         </header>
         <content>
             <?php
                 echo $contentManager->loadContent();
             ?>
-            <section>
-                <article>
-
-                </article>
-            </section>
         </content>
         <footer>
             <?php
-                echo $footer->getTree();
+                echo $footer->getTree('footer');
             ?>
         </footer>
     </body>
