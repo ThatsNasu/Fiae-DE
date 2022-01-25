@@ -1,8 +1,9 @@
 <?php
     $recentFiles = array();
-    $dbresult = $dbman->getRecentUploads();
+    $filesResult = $dbman->getRecentUploads();
     $userlist = $dbman->getUsers();
-    foreach($dbresult as $result) {
+    $newsResult = $dbman->getRecentNews();
+    foreach($filesResult as $result) {
         array_push($recentFiles, new File($result['id'], $result['filename'], $result['filesize'], $result['creatorid'], $result['category']));
     }
     //var_dump($userlist);
@@ -25,7 +26,9 @@
 </section>
 <section>
     News:
-    <article>
-        Some random bullshit
-    </article>
+    <?php
+        foreach($newsResult as $news) {
+            echo '<article class="news"><div class="newsContent">'.$news['content'].'</div><div class="newsRelease">'.$news['released'].'</div></article>';
+        }
+    ?>
 </section>

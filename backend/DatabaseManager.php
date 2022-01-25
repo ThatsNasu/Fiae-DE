@@ -59,5 +59,12 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+        
+        public function getRecentNews() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM news ORDER BY id DESC LIMIT 5");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
     }
 ?>
