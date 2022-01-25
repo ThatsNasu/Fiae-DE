@@ -7,6 +7,12 @@ use ScssPhp\ScssPhp\Compiler;
 $hashfile = "files.json";
 $sourceDir = "templates/style/";
 $destDir = "style/";
+if(!file_exists($sourceDir)){
+    mkdir($sourceDir, 0777, true);
+}
+if(!file_exists($destDir)){
+    mkdir($destDir, 0777, true);
+}
 
 function listFiles($dir){
     $files = [];
