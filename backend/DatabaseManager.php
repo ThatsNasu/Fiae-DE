@@ -66,5 +66,12 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+
+        public function getCategories() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
     }
 ?>
