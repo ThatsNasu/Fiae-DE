@@ -25,6 +25,13 @@
             return $row;
         }
 
+        public function getUsers() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM users");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
         public function getPermission($node) {
             $this->connect();
             $stmt = $this->pdo->prepare("SELECT * FROM permissions WHERE node = ?");
@@ -43,6 +50,27 @@
             $this->connect();
             $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE $position = 1 ORDER BY target ASC");
             $stmt->execute(array());
+            return $stmt->fetchAll();
+        }
+
+        public function getRecentUploads() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM files ORDER BY id DESC LIMIT 10");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        
+        public function getRecentNews() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM news ORDER BY id DESC LIMIT 5");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
+        public function getCategories() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation");
+            $stmt->execute();
             return $stmt->fetchAll();
         }
     }
