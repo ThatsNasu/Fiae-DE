@@ -7,7 +7,6 @@
     $dbman = new DatabaseManager($host, $dbname, $login, $password);
 
     $navigation = new Navigation($dbman->getMenuEntries("inMainNavigation"));
-    $contentManager = new ContentManager();
     $footer = new Navigation($dbman->getMenuEntries("inFooter"));
 ?>
 <!DOCTYPE="html">
@@ -42,7 +41,19 @@
         </header>
         <content>
             <?php
-                echo $contentManager->loadContent();
+                $url = array();
+                if(empty($_GET['url'])) {
+                    $url[0] = "Home";
+                } else {
+                    $url = explode("/", $_GET['url']);
+                }
+                if(file_exists('pages/'.$url[0].'.php')) {
+                    require_once('pages/'.$url[0].'.php');
+                } elseif(file_exists('pages/'.$url[0].'.html')) {
+                    require_once('pages/'.$url[0].'.html');
+                } else {
+                    require_once('pages/404.html');
+                }
             ?>
         </content>
         <footer>
