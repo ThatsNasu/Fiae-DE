@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --color-background-primary: #FFF;
+    --color-background-secondary: #DDD;
+    --color-foreground-primary: #222;
+    --color-foreground-secondary: #333;
+    @media(prefers-color-scheme: dark){
+        --color-background-primary: #222;
+        --color-background-secondary: #333;
+        --color-foreground-primary: #DDD;
+        --color-foreground-secondary: #AAA;
+    }
+}
+body {
+    background-color: var(--color-background-primary);
+    color: var(--color-foreground-primary);
+    font-family: Comfortaa;
+    margin: 0;
+}
+header {
+    background-color: var(--color-background-secondary);
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    > span {
+        display: inline-block;
+        margin: 1em;
+    }
+    nav {
+        display: inline-block;
+        ul {
+            display: inline-block;
+            list-style: none;
+            padding: 0;
+            li {
+                display: inline-block;
+                a {
+                    padding: 5px 10px;
+                    color: var(--color-foreground-primary);
+                    text-decoration: none;
+                    &:hover {
+                        background-color: var(--color-background-primary);
+                        color: var(--color-foreground-secondary);
+                    }
+                }
+                ul {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+content {
+    display: block;
+    padding: 10px;
+    min-height: calc(100vh - 50px - 160px);
+}
+footer {
+    background-color: var(--color-background-secondary);
+    > ul {
+        display: inline-block;
+        list-style: none;
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        > li {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            font-size: 20px;
+            a {
+                display: block;
+                padding: 3px 8px;
+                color: var(--color-foreground-primary);
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            ul {
+                font-size: 16px;
+                margin-top: 15px;
+                padding: 0;
+                li {
+                    display: block;
+                }
+            }
+        }
+    }
+}
