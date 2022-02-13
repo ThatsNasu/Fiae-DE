@@ -73,5 +73,22 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+
+        public function getCategoriesByParent($parent = '/') {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT id FROM navigation WHERE value = ?");
+            $stmt->execute(array($parent));
+            $result = $stmt->fetch();
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = ? ORDER BY value ASC");
+            $stmt->execute(array($result['id']));
+            return $stmt->fetchAll();
+        }
+
+        public function getCategoryByName($name = "Home") {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE value = ?");
+            $stmt->execute(array($name));
+            return $stmt->fetch();
+        }
     }
 ?>
