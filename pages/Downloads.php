@@ -41,7 +41,7 @@
                         $tableBuilder = "";
                         foreach($fileList as $file) {
                             $tableBuilder .= '<div class="fileTableEntry">';
-                            $tableBuilder .= '<div class="fileTableFileName">'.$file['filename'].'</div>';
+                            $tableBuilder .= '<div class="fileTableFileName"><a download href="/pages/get.php?f='.$file['id'].'">'.$file['filename'].'</a></div>';
                             if($users[$file['creatorid']-1]['nickname'] !== "") $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['nickname'].'</div>';
                             elseif($users[$file['creatorid']-1]['fullname'] !== "") $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['fullname'].'</div>';
                             else $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['username'].'</div>';

@@ -99,5 +99,12 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+
+        public function getFileByID($fileID) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE id = ?");
+            $stmt->execute(array($fileID));
+            return $stmt->fetch();
+        }
     }
 ?>
