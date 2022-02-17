@@ -90,5 +90,14 @@
             $stmt->execute(array($name));
             return $stmt->fetch();
         }
+
+        public function getFilesByCategory($category, $offset = 0) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE category = :cat ORDER BY created, id DESC LIMIT 25 OFFSET :offset");
+            $stmt->bindValue(':cat', $category, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
     }
 ?>

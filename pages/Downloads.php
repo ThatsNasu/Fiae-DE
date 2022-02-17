@@ -23,7 +23,12 @@
         </div>
     </article>
     <?php
-        if($dbman->getCategoryByName($url[sizeof($url)-1])['isUploadCategory']) { ?>
+        $cat = $dbman->getCategoryByName($url[sizeof($url)-1]);
+        $users = $dbman->getUsers();
+        if($cat['isUploadCategory']) {
+            if(isset($_GET['page']) && !empty($_GET['page'])) $fileList = $dbman->getFilesByCategory($cat['id'], ($_GET['page']-1)*25);
+            else $fileList = $dbman->getFilesByCategory($cat['id']);
+            ?>
             <article class="fileList">
                 <div class="fileTableHeadline">
                     <span>Filename</span>
@@ -31,7 +36,22 @@
                     <span>Upload Date</span>
                     <span>Filesize</span>
                 </div>
-
+                <div class="fileTableContent">
+                    <?php
+                        $tableBuilder = "";
+                        foreach($fileList as $file) {
+                            $tableBuilder .= '<div class="fileTableEntry">';
+                            $tableBuilder .= '<div class="fileTableFileName">'.$file['filename'].'</div>';
+                            if($users[$file['creatorid']-1]['nickname'] !== "") $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['nickname'].'</div>';
+                            elseif($users[$file['creatorid']-1]['fullname'] !== "") $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['fullname'].'</div>';
+                            else $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['username'].'</div>';
+                            $tableBuilder .= '<div class="fileTableUploadDate">'.$file['created'].'</div>';
+                            $tableBuilder .= '<div class="fileTableFileSize">'.number_format($file['filesize'], 0, ',', '.').' Bytes</div>';
+                            $tableBuilder .= '</div>';
+                        }
+                        echo $tableBuilder;
+                    ?>
+                </div>
             </article>
         <?php } else {
             echo '<article class="subcategories"><span>Categories in '.$url[sizeof($url)-1].'</span>';
