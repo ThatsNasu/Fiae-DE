@@ -5,9 +5,16 @@
     foreach(scandir('classes/') as $file) if($file != "." && $file != "..") require_once('classes/'.$file);
 
     $dbman = new DatabaseManager($host, $dbname, $login, $password);
-
+    
     $navigation = new Navigation($dbman->getMenuEntries("inMainNavigation"));
     $footer = new Navigation($dbman->getMenuEntries("inFooter"));
+
+    $categoriesresult = $dbman->getCategories();
+    $categories = array();
+    
+    foreach($categoriesresult as $categoryresult) {
+        array_push($categories, new Category($categoryresult['id'], $categoryresult['parent'], $categoryresult['value'], $categoryresult['target'], $categoryresult['isUploadCategory']));
+    }
 ?>
 <!DOCTYPE="html">
 <html>
