@@ -1,51 +1,38 @@
 <?php
     class Navigation {
-        private $roots;
+        private $menuItems;
 
-        private $tree;
-
-        public function __construct($result) {
-            $this->roots = array();
+        public function __construct($result, $loggedin) {
+            $list = array();
             foreach($result as $row) {
-                if($row['parent'] == 0) array_push($this->roots, new MenuItem($row['id'], $row['parent'], $row['value'], $row['target'], $row['cssClass'], $row['inMainNavigation'], $row['inFooter'], $row['requiresLogin'], $result));
-            }
-            $this->createTree();
-        }
-
-        public function getRoots() {
-            return $this->roots;
-        }
-
-        /*
-            $loggedin specifies if a user is valid logged in;
-            currently hardcoded defaulted to true for debugging and display purposes.
-        */
-        private function createTree($loggedin = true) {
-            $this->tree = '<ul>';
-            foreach($this->roots as $root) {
-                if($loggedin && $root->requiresLogin()) {
-                    $this->tree .= '<li><a href="'.$root->getTarget().'">'.$root->getValue().'</a>';
-                    if($root->hasChildren()) {
-                        $this->tree .= '<ul>';
-                        $this->tree .= $root->showChildren($root->getTarget(), $loggedin);
-                        $this->tree .= '</ul>';
-                    }
-                    $this->tree .= '</li>';
-                } elseif(!$root->requiresLogin()) {
-                    $this->tree .= '<li><a href="'.$root->getTarget().'">'.$root->getValue().'</a>';
-                    if($root->hasChildren()) {
-                        $this->tree .= '<ul>';
-                        $this->tree .= $root->showChildren($root->getTarget(), $loggedin);
-                        $this->tree .= '</ul>';
-                    }
-                    $this->tree .= '</li>';
+                if($loggedin >= $row['requiresLogin']) {
+                    $menuItem = new MenuItem($row['id'], $row['parent'], $row['value'], $row['target'], $row['requiresLogin']);
+                    if($row['inMainNavigation']) $menuItem->addNavigationPosition('inMainNavigation');
+                    if($row['inFooter']) $menuItem->addNavigationPosition('inFooter');
+                    array_push($list, $menuItem);
                 }
             }
-            $this->tree .= '</ul>';
+            $this->menuItems = $this->buildTree(0, $list);
         }
 
-        public function getTree() {
-            return $this->tree;
+        private function buildTree($parentID, $menuItems) {
+            $list = array();
+            foreach($menuItems as $menuItem) {
+                if($menuItem->getParent() == $parentID) {
+                    $menuItem->setChildren($this->buildTree($menuItem->getID(), $menuItems));
+                    array_push($list, $menuItem);
+                }
+            }
+            return $list;
+        }
+
+        public function renderTree($navigationPosition) {
+            $tree = '<ul>';
+            foreach($this->menuItems as $root) {
+                $tree .= $root->renderItem($navigationPosition);
+            }
+            $tree .= '</ul>';
+            return $tree;
         }
     }
 ?>

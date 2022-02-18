@@ -6,8 +6,7 @@
 
     $dbman = new DatabaseManager($host, $dbname, $login, $password);
     
-    $navigation = new Navigation($dbman->getMenuEntries("inMainNavigation"));
-    $footer = new Navigation($dbman->getMenuEntries("inFooter"));
+    $navigation = new Navigation($dbman->getMenuEntries(), true);
 
     $categoriesresult = $dbman->getCategories();
     $categories = array();
@@ -42,7 +41,7 @@
             </span>
             <nav>
                 <?php
-                    echo $navigation->getTree('nav');
+                    echo $navigation->renderTree('inMainNavigation');
                 ?>
             </nav>
         </header>
@@ -65,7 +64,7 @@
         </content>
         <footer>
             <?php
-                echo $footer->getTree('footer');
+                echo $navigation->renderTree('inFooter');
             ?>
         </footer>
     </body>
