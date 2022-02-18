@@ -69,7 +69,7 @@
 
         public function getCategories() {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY value ASC");
             $stmt->execute();
             return $stmt->fetchAll();
         }
@@ -99,12 +99,18 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
-
+      
         public function getFileByID($fileID) {
             $this->connect();
             $stmt = $this->pdo->prepare("SELECT * FROM files WHERE id = ?");
             $stmt->execute(array($fileID));
             return $stmt->fetch();
+        }
+      
+        public function insertNewFile($filename, $filesize, $creator, $category) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("INSERT INTO files (filename, filesize, creatorid, category) VALUES (?, ?, ?, ?)");
+            $stmt->execute(array($filename, $filesize, $creator, $category));
         }
     }
 ?>
