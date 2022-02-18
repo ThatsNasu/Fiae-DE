@@ -14,6 +14,10 @@
             $this->creator = $creator;
         }
 
+        public function getID() {
+            return $this->id;
+        }
+
         public function getFilename() {
             return $this->filename;
         }
