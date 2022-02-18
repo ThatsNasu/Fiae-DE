@@ -1,34 +1,53 @@
 <?php
     class MenuItem {
         private $id;
+        private $parent;
         private $value;
         private $target;
-        private $cssClass;
-        private $childs;
-        private $inMainMenu;
-        private $inFooter;
+        private $children;
         private $requiresLogin;
+        private $navigationPositions;
 
-
-        private $child;
-
-        public function __construct($id, $parent, $value, $target, $cssClass, $inMainMenu, $inFooter, $requiresLogin, $result) {
+        public function __construct($id, $parent, $value, $target, $requiresLogin) {
+            $this->children = array();
+            $this->navigationPositions = array();
             $this->id = $id;
+            $this->parent = $parent;
             $this->value = $value;
             $this->target = $target;
-            $this->cssClass = $cssClass;
-            $this->inMainMenu = $inMainMenu;
-            $this->inFooter = $inFooter;
             $this->requiresLogin = $requiresLogin;
-            $this->childs = array();
-            foreach($result as $row) {
-			    if($row['parent'] == $this->id) array_push($this->childs, new MenuItem($row['id'], $row['parent'], $row['value'], $row['target'], $row['cssClass'], $row['inMainNavigation'], $row['inFooter'], $row['requiresLogin'], $result));
-		    }
+        }
+
+        // -------------------- METHODS --------------------
+
+        public function addNavigationPosition($navigationPosition) {
+            if(!in_array($navigationPosition, $this->navigationPositions)) array_push($this->navigationPositions, $navigationPosition);
+        }
+
+        public function addChild($child) {
+            if(!in_array($child, $this->childs)) array_push($this->childs, $child);
+        }
+
+        public function renderItem($navigationPosition, $parenttarget = '') {
+            $tree = '';
+            if(!in_array($navigationPosition, $this->navigationPositions)) return;
+            $tree .= '<li><a href="'.$parenttarget.$this->target.'">'.$this->value.'</a>';
+            $string = '';
+            foreach($this->children as $child) {
+                $string .= $child->renderItem($navigationPosition, $parenttarget.$this->target);
+            }
+            if($string !== '') $tree .= '<ul>'.$string.'</ul>';
+            $tree .=  '</li>';
+            return $tree;
         }
 
         // -------------------- GETTER --------------------
         public function getID() {
             return $this->id;
+        }
+
+        public function getParent() {
+            return $this->parent;
         }
         
         public function getValue() {
@@ -39,52 +58,14 @@
             return $this->target;
         }
 
-        public function getCSSClass() {
-            return $this->cssClass;
-        }
-
-        public function inMainMenu() {
-            return $this->inMainMenu;
-        }
-
-        public function inFooter() {
-            return $this->inFooter;
-        }
-
         public function requiresLogin() {
             return $this->requiresLogin;
         }
 
-        public function getChilds() {
-            return $this->childs;
-        }
+        // -------------------- SETTER --------------------
 
-        public function hasChildren() {
-            if(sizeof($this->childs) == 0) return false;
-            return true;
+        public function setChildren($children) {
+            $this->children = $children;
         }
-
-        public function showChildren($roottarget, $loggedin = false) {
-            foreach($this->childs as $child) {
-                if($loggedin && $child->requiresLogin()) {
-                    $this->child .= '<li><a href="'.$roottarget.$child->getTarget().'">'.$child->getValue().'</a>';
-                    if($child->hasChildren()) {
-                        $this->child .= '<ul>';
-                        $this->child .= $child->showChildren($roottarget.$child->getTarget());
-                        $this->child .= '</ul>';
-                    }
-                    $this->child .= '</li>';
-                } elseif(!$child->requiresLogin()) {
-                    $this->child .= '<li><a href="'.$roottarget.$child->getTarget().'">'.$child->getValue().'</a>';
-                    if($child->hasChildren()) {
-                        $this->child .= '<ul>';
-                        $this->child .= $child->showChildren($roottarget.$child->getTarget());
-                        $this->child .= '</ul>';
-                    }
-                    $this->child .= '</li>';
-                }
-            }
-		    return $this->child;
-	    }
     }
 ?>
