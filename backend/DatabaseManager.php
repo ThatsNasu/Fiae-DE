@@ -69,7 +69,7 @@
 
         public function getCategories() {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY value ASC");
             $stmt->execute();
             return $stmt->fetchAll();
         }
@@ -98,6 +98,12 @@
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll();
+        }
+
+        public function insertNewFile($filename, $filesize, $creator, $category) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("INSERT INTO files (filename, filesize, creatorid, category) VALUES (?, ?, ?, ?)");
+            $stmt->execute(array($filename, $filesize, $creator, $category));
         }
     }
 ?>
