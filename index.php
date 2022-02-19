@@ -3,10 +3,11 @@
     require_once('backend/DatabaseManager.php');
     require_once('backend/dblogin.php');
     foreach(scandir('classes/') as $file) if($file != "." && $file != "..") require_once('classes/'.$file);
+    session_start();
 
     $dbman = new DatabaseManager($host, $dbname, $login, $password);
     
-    $navigation = new Navigation($dbman->getMenuEntries(), true);
+    $navigation = new Navigation($dbman->getMenuEntries(), Helpers::isLoggedIn());
 
     $categoriesresult = $dbman->getCategories();
     $categories = array();
@@ -14,6 +15,8 @@
     foreach($categoriesresult as $categoryresult) {
         array_push($categories, new Category($categoryresult['id'], $categoryresult['parent'], $categoryresult['value'], $categoryresult['target'], $categoryresult['isUploadCategory']));
     }
+    
+    
 ?>
 <!DOCTYPE="html">
 <html>
