@@ -16,5 +16,10 @@
         public static function getFullPathByCategoryID($categoryID, $categories) {
             foreach($categories as $category) if($category->getID() == $categoryID) return Helpers::getFullPathByCategory($category, $categories);
         }
+
+        public static function isLoggedIn() {
+            if(isset($_SESSION['user']) && $_SESSION['user']->getUUID()) return true;
+            return false;
+        }
     }
 ?>

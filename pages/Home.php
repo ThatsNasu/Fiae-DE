@@ -17,10 +17,12 @@
 </section>
 <section>
     <article>
-        Recent fileuploads:
         <?php
-            foreach($recentFiles as $file) {
-                echo '<div class="recentFile">'.$userlist[$file->getCreatorID()-1]['username'].' uploaded <a download href="/pages/get.php?f='.$file->getID().'">'.$file->getFilename().'</a> in category <a href="'.Helpers::getFullPathByCategoryID($file->getCategory(), $categories).'" target="_blank" rel="noopener">'.Helpers::getCategoryByID($file->getCategory(), $categories)->getValue().'</a></div>';
+            if(Helpers::isLoggedIn()) {
+                echo 'Recent fileuploads:';
+                foreach($recentFiles as $file) {
+                    echo '<div class="recentFile">'.$userlist[$file->getCreatorID()-1]['username'].' uploaded <a download href="/pages/get.php?f='.$file->getID().'">'.$file->getFilename().'</a> in category <a href="'.Helpers::getFullPathByCategoryID($file->getCategory(), $categories).'" target="_blank" rel="noopener">'.Helpers::getCategoryByID($file->getCategory(), $categories)->getValue().'</a></div>';
+                }
             }
         ?>
     </article>

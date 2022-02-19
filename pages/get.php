@@ -3,7 +3,12 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/backend/DatabaseManager.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/classes/Helpers.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/classes/Category.php');
-
+    require_once($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
+    session_start();
+    if(!Helpers::isLoggedIn()) {
+        require_once($_SERVER['DOCUMENT_ROOT'].'/pages/Login.php');
+        return;
+    }
 
     $base = '/mnt/pi4tb/FIAE-DE';
     $dbman = new DatabaseManager($host, $dbname, $login, $password);

@@ -1,3 +1,9 @@
+<?php
+    if(!Helpers::isLoggedIn()) {
+        require_once('pages/Login.php');
+        return;
+    }
+?>
 <section>
     <article>
         <?php
