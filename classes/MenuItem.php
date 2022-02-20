@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     class MenuItem {
         private $id;
         private $parent;

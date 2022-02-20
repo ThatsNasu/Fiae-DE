@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     class Category {
         private $id;
         private $parent;

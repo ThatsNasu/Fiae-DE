@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     class Helpers {
 
         public static function getcategoryByID($categoryID, $categories) {

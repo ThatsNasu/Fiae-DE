@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     require_once('backend/scssAutoCompiler.php');
     require_once('backend/DatabaseManager.php');
     require_once('backend/dblogin.php');
