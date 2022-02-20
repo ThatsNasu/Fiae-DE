@@ -112,5 +112,12 @@
             $stmt = $this->pdo->prepare("INSERT INTO files (filename, filesize, creatorid, category) VALUES (?, ?, ?, ?)");
             $stmt->execute(array($filename, $filesize, $creator, $category));
         }
+
+        public function getFileCountByCategory($catgeoryID) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT COUNT(id) FROM files WHERE category = ?");
+            $stmt->execute(array($catgeoryID));
+            return $stmt->fetch()[0];
+        }
     }
 ?>
