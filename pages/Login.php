@@ -3,7 +3,13 @@
         $user = new User($dbman->getUserData($_POST['username']));
         if(password_verify($_POST['password'], $user->getPassword())) {
             $_SESSION['user'] = $user;
-            header("refresh:0");
+            if($url[sizeof($url)-1] == 'Logout') {
+                $urlbuilder = '';
+                for($i = 0; $i < sizeof($url)-1; $i++) $urlbuilder .= '/'.$url[$i];
+                header('Location: '.$urlbuilder);
+            } else {
+                header("refresh:0");
+            }
         }
     }
     if(!Helpers::isLoggedIn()) {

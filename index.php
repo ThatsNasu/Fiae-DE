@@ -1,4 +1,5 @@
 <?php
+    header('refresh:1200; url=/User/Logout');
     require_once('backend/scssAutoCompiler.php');
     require_once('backend/DatabaseManager.php');
     require_once('backend/dblogin.php');
