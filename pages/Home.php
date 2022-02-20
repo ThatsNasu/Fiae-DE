@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     $recentFiles = array();
     $filesResult = $dbman->getRecentUploads();
     $userlist = $dbman->getUsers();

@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
 
 require_once("./backend/dependencies/scssphp/scss.inc.php");
 

@@ -1,4 +1,6 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     class Navigation {
         private $menuItems;
 

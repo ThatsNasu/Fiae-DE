@@ -1,4 +1,5 @@
 <?php
+    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     if(isset($_POST['username']) && isset($_POST['password'])) {
         $user = new User($dbman->getUserData($_POST['username']));
         if(password_verify($_POST['password'], $user->getPassword())) {
