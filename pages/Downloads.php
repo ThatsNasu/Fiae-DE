@@ -32,10 +32,20 @@
         $cat = $dbman->getCategoryByName($url[sizeof($url)-1]);
         $users = $dbman->getUsers();
         if($cat['isUploadCategory']) {
+            $itemcount = $dbman->getFileCountByCategory($cat['id']);
             if(isset($_GET['page']) && !empty($_GET['page'])) $fileList = $dbman->getFilesByCategory($cat['id'], ($_GET['page']-1)*25);
             else $fileList = $dbman->getFilesByCategory($cat['id']);
             ?>
             <article class="fileList">
+                <?php
+                    $pages = 0;
+                    if($itemcount > 25) {
+                        echo '<div class="pageselector">';
+                        $pages = ceil($itemcount / 25);
+                        for($i = 0; $i < $pages; $i++) echo '<a href="?page='.($i+1).'">'.($i+1).'</a>';
+                        echo '</div>';
+                    }
+                ?>
                 <div class="fileTableHeadline">
                     <span>Filename</span>
                     <span>Uploader</span>
@@ -58,6 +68,14 @@
                         echo $tableBuilder;
                     ?>
                 </div>
+                <?php
+                    if($itemcount > 25) {
+                        echo '<div class="pageselector">';
+                        $pages = ceil($itemcount / 25);
+                        for($i = 0; $i < $pages; $i++) echo '<a href="?page='.($i+1).'">'.($i+1).'</a>';
+                        echo '</div>';
+                    }
+                ?>
             </article>
         <?php } else {
             echo '<article class="subcategories"><span>Categories in '.$url[sizeof($url)-1].'</span>';
