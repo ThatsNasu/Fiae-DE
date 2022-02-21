@@ -33,6 +33,12 @@
             return $stmt->fetchAll();
         }
 
+        public function updateUser($userid, $field, $value) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("UPDATE users set $field = ? WHERE id = ?");
+            return $stmt->execute(array($value, $userid));
+        }
+
         public function getPermission($node) {
             $this->connect();
             $stmt = $this->pdo->prepare("SELECT * FROM permissions WHERE node = ?");
