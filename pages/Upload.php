@@ -18,8 +18,9 @@
     }
 ?>
 
-<section>
+<section id="upload">
     <article>
+        <h1>Upload your file:</h1>
         <form method="post" enctype="multipart/form-data">
             <select name="category" required >
                 <?php

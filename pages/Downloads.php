@@ -5,89 +5,73 @@
         return;
     }
 ?>
-<section>
-    <article>
-        <?php
-            if(sizeof($url) >= 2) {
-                echo 'Other Categories in <a href="';
-                for($i = 0; $i <= sizeof($url)-2; $i++) {
-                    echo '/'.$url[$i];
-                }
-                echo '">'.$url[sizeof($url)-2].'</a>';
-            }
-        ?>
-        <div class="foldableCategories">
-            <?php
-                if(sizeof($url) > 1) {
-                    $childCategories = $dbman->getCategoriesByParent($url[sizeof($url)-2]);
-                    foreach($childCategories as $child) {
-                        echo '<a href="';
-                        for($i = 0; $i < sizeof($url)-1; $i++) echo '/'.$url[$i];
-                        echo $child['target'].'">'.$child['value'].'</a><br />';
-                    }
-                }
-            ?>
-        </div>
-    </article>
+<section id="downloads">
     <?php
+        $catBuilder = '';
+        $filetableBuilder = '';
+        if(sizeof($url) >= 2) {
+            $catBuilder .= '<article id="categories">';
+            $catBuilder .= '<h1>Other Categories in <a href="';
+            for($i = 0; $i <= sizeof($url)-2; $i++) {
+                $catBuilder .= '/'.$url[$i];
+            }
+            $catBuilder .= '">'.$url[sizeof($url)-2].'</a></h1>';
+            $catBuilder .= '<div class="foldableCategories">';
+            $childCategories = $dbman->getCategoriesByParent($url[sizeof($url)-2]);
+            foreach($childCategories as $child) {
+                $catBuilder .= '<a href="';
+                for($i = 0; $i < sizeof($url)-1; $i++) $catBuilder .= '/'.$url[$i];
+                $catBuilder .= $child['target'].'">'.$child['value'].'</a>';
+            }
+            $catBuilder .= '</div>';
+        }
         $cat = $dbman->getCategoryByName($url[sizeof($url)-1]);
         $users = $dbman->getUsers();
-        if($cat['isUploadCategory']) {
+        if(!$cat['isUploadCategory']) {
+            $catBuilder .= '<div id="subcategories"><h2>Categories in '.$url[sizeof($url)-1].'</h2>';
+            $childCategories = $dbman->getCategoriesByParent($url[sizeof($url)-1]);
+            $catBuilder .= '<div class="foldableCategories">';
+            foreach($childCategories as $child) {
+                $catBuilder .= '<a href="';
+                for($i = 0; $i <= sizeof($url)-1; $i++) $catBuilder .= '/'.$url[$i];
+                $catBuilder .= $child['target'].'">'.$child['value'].'</a>';
+            }
+            $catBuilder .= '</div></div>';
+        } else {
             $itemcount = $dbman->getFileCountByCategory($cat['id']);
             if(isset($_GET['page']) && !empty($_GET['page'])) $fileList = $dbman->getFilesByCategory($cat['id'], ($_GET['page']-1)*25);
             else $fileList = $dbman->getFilesByCategory($cat['id']);
-            ?>
-            <article class="fileList">
-                <?php
-                    $pages = 0;
-                    if($itemcount > 25) {
-                        echo '<div class="pageselector">';
-                        $pages = ceil($itemcount / 25);
-                        for($i = 0; $i < $pages; $i++) echo '<a href="?page='.($i+1).'">'.($i+1).'</a>';
-                        echo '</div>';
-                    }
-                ?>
-                <div class="fileTableHeadline">
-                    <span>Filename</span>
-                    <span>Uploader</span>
-                    <span>Upload Date</span>
-                    <span>Filesize</span>
-                </div>
-                <div class="fileTableContent">
-                    <?php
-                        $tableBuilder = "";
-                        foreach($fileList as $file) {
-                            $tableBuilder .= '<div class="fileTableEntry">';
-                            $tableBuilder .= '<div class="fileTableFileName"><a download href="/pages/get.php?f='.$file['id'].'">'.$file['filename'].'</a></div>';
-                            if($users[$file['creatorid']-1]['nickname'] !== "") $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['nickname'].'</div>';
-                            elseif($users[$file['creatorid']-1]['fullname'] !== "") $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['fullname'].'</div>';
-                            else $tableBuilder .= '<div class="fileTableCreator">'.$users[$file['creatorid']-1]['username'].'</div>';
-                            $tableBuilder .= '<div class="fileTableUploadDate">'.$file['created'].'</div>';
-                            $tableBuilder .= '<div class="fileTableFileSize">'.number_format($file['filesize'], 0, ',', '.').' Bytes</div>';
-                            $tableBuilder .= '</div>';
-                        }
-                        echo $tableBuilder;
-                    ?>
-                </div>
-                <?php
-                    if($itemcount > 25) {
-                        echo '<div class="pageselector">';
-                        $pages = ceil($itemcount / 25);
-                        for($i = 0; $i < $pages; $i++) echo '<a href="?page='.($i+1).'">'.($i+1).'</a>';
-                        echo '</div>';
-                    }
-                ?>
-            </article>
-        <?php } else {
-            echo '<article class="subcategories"><span>Categories in '.$url[sizeof($url)-1].'</span>';
-            $childCategories = $dbman->getCategoriesByParent($url[sizeof($url)-1]);
-            echo '<div class="foldableCategrories">';
-            foreach($childCategories as $child) {
-                echo '<a href="';
-                for($i = 0; $i <= sizeof($url)-1; $i++) echo '/'.$url[$i];
-                echo $child['target'].'">'.$child['value'].'</a><br />';
+            $filetableBuilder .= '<article id="fileList">';
+            $pages = 0;
+            if($itemcount > 25) {
+                $filetableBuilder .= '<div class="pageselector">';
+                $pages = ceil($itemcount / 25);
+                for($i = 0; $i < $pages; $i++) $filetableBuilder .= '<a href="?page='.($i+1).'">'.($i+1).'</a>';
+                $filetableBuilder .= '</div>';
             }
-            echo '</div></article>';
+            $filetableBuilder .= '<table><thead><tr><th>Filename</th><th>Uploader</th><th>Upload Date</th><th>Filesize</th></tr></thead>';
+            $tableBuilder = '<tbody>';
+            foreach($fileList as $file) {
+                $tableBuilder .= '<tr>';
+                $tableBuilder .= '<td><a download href="/pages/get.php?f='.$file['id'].'">'.$file['filename'].'</a></td>';
+                if($users[$file['creatorid']-1]['nickname'] !== "") $tableBuilder .= '<td>'.$users[$file['creatorid']-1]['nickname'].'</td>';
+                elseif($users[$file['creatorid']-1]['fullname'] !== "") $tableBuilder .= '<td>'.$users[$file['creatorid']-1]['fullname'].'</td>';
+                else $tableBuilder .= '<td>'.$users[$file['creatorid']-1]['username'].'</td>';
+                $tableBuilder .= '<td>'.$file['created'].'</td>';
+                $tableBuilder .= '<td>'.number_format($file['filesize'], 0, ',', '.').' Bytes</td>';
+                $tableBuilder .= '</tr>';
+            }
+            $filetableBuilder .= $tableBuilder.'</tbody></table>';
+            if($itemcount > 25) {
+                $filetableBuilder .= '<div class="pageselector">';
+                $pages = ceil($itemcount / 25);
+                for($i = 0; $i < $pages; $i++) $filetableBuilder .= '<a href="?page='.($i+1).'">'.($i+1).'</a>';
+                $filetableBuilder .= '</div>';
+            }
         }
+        $catBuilder .= '</article>';
+        $filetableBuilder .= '</article>';
+        echo $catBuilder;
+        echo $filetableBuilder;
     ?>
 </section>
