@@ -13,12 +13,16 @@
 
 <section>
     <article>
-        <?php
-            $messages = $dbman->getCarousselMessages();
-            foreach($messages as $message) {
-                echo '<div class="messageCarousselElement">'.$message['value'].'</div>';
-            }
-        ?>
+        <div class="mainWrapper">
+            <div class="messageWrapper">
+                <?php
+                    $messages = $dbman->getCarousselMessages();
+                    foreach($messages as $message) {
+                        echo '<div class="messageCarousselElement">'.$message['value'].'</div>';
+                    }
+                ?>
+            </div>
+        </div>
     </article>
 </section>
 <section>
