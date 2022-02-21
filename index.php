@@ -25,10 +25,12 @@
     <head>
         <title>
             <?php
-                if(!isset($_GET['url']) && !empty($_GET['url'])) {
-                    echo 'FIAE-DE - '.$_GET['url'];
+                $url = Helpers::getUrl();
+                if(sizeof($url) > 0) {
+                    echo 'FIAE-DE - '.$url[sizeof($url)-1]; 
                 } else {
-                    echo 'Welcome to FIAE-DE';
+                    echo 'Welcome to FIAE-DE'; 
+                    $url[0] = 'Home';
                 }
             ?>
         </title>
@@ -52,12 +54,6 @@
         </header>
         <content>
             <?php
-                $url = array();
-                if(empty($_GET['url'])) {
-                    $url[0] = "Home";
-                } else {
-                    $url = explode("/", $_GET['url']);
-                }
                 if(file_exists('pages/'.$url[0].'.php')) {
                     require_once('pages/'.$url[0].'.php');
                 } elseif(file_exists('pages/'.$url[0].'.html')) {
