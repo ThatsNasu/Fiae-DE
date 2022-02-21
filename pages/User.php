@@ -12,5 +12,9 @@
         require_once('pages/Login.php');
         return;
     }
+    if(isset($url[1]) && $url[1] == 'Settings') {
+        require_once('pages/user/Settings.php');
+        return;
+    }
     echo 'someday show userprofile here';
 ?>
