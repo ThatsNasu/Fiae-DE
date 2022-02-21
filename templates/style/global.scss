@@ -57,6 +57,102 @@ content {
     padding: 10px;
     min-height: calc(100vh - 50px - 160px);
 
+    h1 {
+        font-size: 1.5em;
+        a {
+            color: inherit;
+        }
+    }
+    h2 {
+        font-size: 1em;
+        a {
+            color: inherit;
+        }
+    }
+
+    #downloads {
+        .foldableCategories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            > a {
+                border: 2px solid var(--color-foreground-secondary);
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+                margin: 5px;
+                border-radius: 10px;
+                padding: 5px 10px;
+                transition: transform .2s;
+                color: inherit;
+                &:hover{
+                    transform: scale(1.05);
+                }
+            }
+        }
+        article#fileList {
+            > table {
+                margin: 20px;
+                width: calc(100% - 40px);
+                border-collapse: collapse;
+                thead {
+                    tr {
+                        background-color: var(--color-background-secondary);
+                        th {
+                            border-bottom: 1px solid var(--color-foreground-secondary);
+                            text-align: left;
+                            padding: 10px 20px;
+                            &:nth-child(1){
+                                width: calc(100% - 600px);
+                            }
+                            &:nth-child(2){
+                                width: 150px;
+                            }
+                            &:nth-child(3){
+                                width: 250px;
+                            }
+                            &:nth-child(4){
+                                width: 200px;
+                            }
+                        }
+                    }
+                }
+                tr {
+                    &:hover {
+                        background-color: var(--color-background-secondary);
+                    }
+                    > th, td {
+                        border-bottom: 1px solid var(--color-background-secondary);
+                        a {
+                            color: var(--color-foreground-primary);
+                            display: block;
+                            padding: 5px 10px;
+                            text-decoration: none;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            .pageselector {
+                text-align: center;
+                &:first-child {
+                    margin-top: 20px;
+                }
+                a {
+                    display: inline-block;
+                    padding: 5px;
+                    color: var(--color-foreground-primary);
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
     #upload {
         width: 500px;
         padding: 20px;
