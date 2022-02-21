@@ -13,7 +13,16 @@
 
 <section>
     <article>
-        If you have any suggestions or found a bug for / on this website, feel free to head over to the <a href="https://github.com/dasnasu/fiae-de" rel="_noopener" target="blank">git repository</a> and create an <a href="https://github.com/dasnasu/fiae-de/issues" rel="_noopener" target="blank">issue</a>. Any hints for improvements, feature requests or bugs are very much appreciated.
+        <div class="mainWrapper">
+            <div class="messageWrapper">
+                <?php
+                    $messages = $dbman->getCarousselMessages();
+                    foreach($messages as $message) {
+                        echo '<div class="messageCarousselElement">'.$message['value'].'</div>';
+                    }
+                ?>
+            </div>
+        </div>
     </article>
 </section>
 <section>
