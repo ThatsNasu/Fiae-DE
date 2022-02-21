@@ -22,5 +22,12 @@
             if(isset($_SESSION['user']) && $_SESSION['user']->getUUID()) return true;
             return false;
         }
+
+        public static function getUrl() {
+            if(!empty($_GET['url'])) {
+                return explode('/', $_GET['url']);
+            }
+            return array();
+        }
     }
 ?>
