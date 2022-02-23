@@ -6,7 +6,6 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
     session_start();
     if(!Helpers::isLoggedIn()) {
-        require_once($_SERVER['DOCUMENT_ROOT'].'/pages/Login.php');
         return;
     }
 

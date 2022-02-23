@@ -1,5 +1,4 @@
 <?php
-    if(strpos($_SERVER['REQUEST_URI'], '.')) header("Location: /");
     class DatabaseManager {
         private $host;
         private $database;
