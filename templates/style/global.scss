@@ -1,0 +1,218 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --color-background-primary: #FFF;
+    --color-background-secondary: #DDD;
+    --color-foreground-primary: #222;
+    --color-foreground-secondary: #333;
+    @media(prefers-color-scheme: dark){
+        --color-background-primary: #222;
+        --color-background-secondary: #333;
+        --color-foreground-primary: #DDD;
+        --color-foreground-secondary: #AAA;
+    }
+}
+body {
+    background-color: var(--color-background-primary);
+    color: var(--color-foreground-primary);
+    font-family: Comfortaa;
+    margin: 0;
+}
+header {
+    background-color: var(--color-background-secondary);
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    > span {
+        display: inline-block;
+        margin: 1em;
+    }
+    nav {
+        display: inline-block;
+        ul {
+            display: inline-block;
+            list-style: none;
+            padding: 0;
+            li {
+                display: inline-block;
+                a {
+                    padding: 5px 10px;
+                    color: var(--color-foreground-primary);
+                    text-decoration: none;
+                    &:hover {
+                        background-color: var(--color-background-primary);
+                        color: var(--color-foreground-secondary);
+                    }
+                }
+                ul {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+content {
+    display: block;
+    padding: 10px;
+    min-height: calc(100vh - 50px - 160px);
+
+    h1 {
+        font-size: 1.5em;
+        a {
+            color: inherit;
+        }
+    }
+    h2 {
+        font-size: 1em;
+        a {
+            color: inherit;
+        }
+    }
+
+    #downloads {
+        .foldableCategories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            > a {
+                border: 2px solid var(--color-foreground-secondary);
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+                margin: 5px;
+                border-radius: 10px;
+                padding: 5px 10px;
+                transition: transform .2s;
+                color: inherit;
+                &:hover{
+                    transform: scale(1.05);
+                }
+            }
+        }
+        article#fileList {
+            > table {
+                margin: 20px;
+                width: calc(100% - 40px);
+                border-collapse: collapse;
+                thead {
+                    tr {
+                        background-color: var(--color-background-secondary);
+                        th {
+                            border-bottom: 1px solid var(--color-foreground-secondary);
+                            text-align: left;
+                            padding: 10px 20px;
+                            &:nth-child(1){
+                                width: calc(100% - 600px);
+                            }
+                            &:nth-child(2){
+                                width: 150px;
+                            }
+                            &:nth-child(3){
+                                width: 250px;
+                            }
+                            &:nth-child(4){
+                                width: 200px;
+                            }
+                        }
+                    }
+                }
+                tr {
+                    &:hover {
+                        background-color: var(--color-background-secondary);
+                    }
+                    > th, td {
+                        border-bottom: 1px solid var(--color-background-secondary);
+                        a {
+                            color: var(--color-foreground-primary);
+                            display: block;
+                            padding: 5px 10px;
+                            text-decoration: none;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            .pageselector {
+                text-align: center;
+                &:first-child {
+                    margin-top: 20px;
+                }
+                a {
+                    display: inline-block;
+                    padding: 5px;
+                    color: var(--color-foreground-primary);
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    #upload {
+        width: 500px;
+        padding: 20px;
+        margin: 100px auto;
+        border: 1px solid var(--color-foreground-secondary);
+        border-radius: 10px;
+        h1 {
+            margin-top: 0px;
+        }
+        form {
+            margin-bottom: 0px;
+            input, select {
+                display: block;
+                margin-top: 10px;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--color-foreground-secondary);
+                border-radius: 5px;
+                background-color: var(--color-backgroud-secondary);
+                cursor: pointer;
+                outline: none;
+                &[type="submit"]{
+                    background-color: var(--color-foreground-secondary);
+                    color: var(--color-background-primary);
+                }
+            }
+        }
+    }
+}
+footer {
+    background-color: var(--color-background-secondary);
+    > ul {
+        display: inline-block;
+        list-style: none;
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        > li {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            font-size: 20px;
+            a {
+                display: block;
+                padding: 3px 8px;
+                color: var(--color-foreground-primary);
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            ul {
+                font-size: 16px;
+                margin-top: 15px;
+                padding: 0;
+                li {
+                    display: block;
+                }
+            }
+        }
+    }
+}
