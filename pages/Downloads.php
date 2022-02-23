@@ -11,11 +11,11 @@
         $filetableBuilder = '';
         if(sizeof($url) >= 2) {
             $catBuilder .= '<article id="categories">';
-            $catBuilder .= '<h1>Other Categories in <a href="';
+            $catBuilder .= '<h2>Other Categories in <a href="';
             for($i = 0; $i <= sizeof($url)-2; $i++) {
                 $catBuilder .= '/'.$url[$i];
             }
-            $catBuilder .= '">'.$url[sizeof($url)-2].'</a></h1>';
+            $catBuilder .= '">'.$url[sizeof($url)-2].'</a></h2>';
             $catBuilder .= '<div class="foldableCategories">';
             $childCategories = $dbman->getCategoriesByParent($url[sizeof($url)-2]);
             foreach($childCategories as $child) {
