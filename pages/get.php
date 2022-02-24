@@ -29,8 +29,8 @@
             header('Expires: 0');
             header('Cache-Control: no-cache');
             header('Pragma: public');
-            header('Content-Length: '.$file['size']);
-            fpassthru(fopen($file['diskpath'].$file['filename'], 'rb'));
+            header('Content-Length: '.$file['filesize']);
+            fpassthru(fopen($base.Helpers::getFullPathByCategoryID($file['category'], $categories).'/'.$file['filename'], 'rb'));
             exit;
         }
         echo 'file doesnt exist';
