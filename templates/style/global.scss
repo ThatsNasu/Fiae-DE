@@ -6,6 +6,7 @@
     --color-background-secondary: #DDD;
     --color-foreground-primary: #222;
     --color-foreground-secondary: #333;
+    --color-theme-primary: #ff1a7e;
     @media(prefers-color-scheme: dark){
         --color-background-primary: #222;
         --color-background-secondary: #333;
@@ -124,7 +125,7 @@ content {
                     > th, td {
                         border-bottom: 1px solid var(--color-background-secondary);
                         a {
-                            color: var(--color-foreground-primary);
+                            color: var(--color-theme-primary);
                             display: block;
                             padding: 5px 10px;
                             text-decoration: none;

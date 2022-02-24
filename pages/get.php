@@ -22,6 +22,7 @@
 
     if(isset($_GET['f']) && !empty($_GET['f'])) {
         $file = $dbman->getFileByID($_GET['f']);
+        echo $base.Helpers::getFullPathByCategoryID($file['category'], $categories).'/'.$file['filename'];
         if(file_exists($base.Helpers::getFullPathByCategoryID($file['category'], $categories).'/'.$file['filename'])) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
