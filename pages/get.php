@@ -33,6 +33,6 @@
             fpassthru(fopen($base.Helpers::getFullPathByCategoryID($file['category'], $categories).'/'.$file['filename'], 'rb'));
             exit;
         }
-        echo 'error';
+        echo 'File not found';
     }
 ?>
