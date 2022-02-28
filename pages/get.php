@@ -33,6 +33,6 @@
             fpassthru(fopen($base.Helpers::getFullPathByCategoryID($file['category'], $categories).'/'.$file['filename'], 'rb'));
             exit;
         }
-        echo 'The requested file does not exist or the Webserver does not have permission to read it';
+        echo 'error';
     }
 ?>
