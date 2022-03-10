@@ -21,7 +21,7 @@
             foreach($childCategories as $child) {
                 $catBuilder .= '<a href="';
                 for($i = 0; $i < sizeof($url)-1; $i++) $catBuilder .= '/'.$url[$i];
-                $catBuilder .= $child['target'].'">'.$child['value'].'</a>';
+                $catBuilder .= $child['linksto'].'">'.$child['label'].'</a>';
             }
             $catBuilder .= '</div>';
         }
@@ -34,7 +34,7 @@
             foreach($childCategories as $child) {
                 $catBuilder .= '<a href="';
                 for($i = 0; $i <= sizeof($url)-1; $i++) $catBuilder .= '/'.$url[$i];
-                $catBuilder .= $child['target'].'">'.$child['value'].'</a>';
+                $catBuilder .= $child['linksto'].'">'.$child['label'].'</a>';
             }
             $catBuilder .= '</div></div>';
         } else {
