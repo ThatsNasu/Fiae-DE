@@ -16,7 +16,7 @@
     $categories = array();
     
     foreach($categoriesresult as $categoryresult) {
-        array_push($categories, new Category($categoryresult['id'], $categoryresult['parent'], $categoryresult['value'], $categoryresult['target'], $categoryresult['isUploadCategory']));
+        array_push($categories, new Category($categoryresult['id'], $categoryresult['parent'], $categoryresult['label'], $categoryresult['linksto'], $categoryresult['isUploadCategory']));
     }
 
 
