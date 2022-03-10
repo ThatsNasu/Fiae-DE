@@ -124,7 +124,6 @@ content {
                     > th, td {
                         border-bottom: 1px solid var(--color-background-secondary);
                         a {
-                            color: var(--color-foreground-primary);
                             display: block;
                             padding: 5px 10px;
                             text-decoration: none;
@@ -165,6 +164,7 @@ content {
         form {
             margin-bottom: 0px;
             input, select {
+                color: var(--color-foreground-primary);
                 display: block;
                 margin-top: 10px;
                 width: 100%;
@@ -177,6 +177,10 @@ content {
                 &[type="submit"]{
                     background-color: var(--color-foreground-secondary);
                     color: var(--color-background-primary);
+                }
+                > option {
+                    color: black;
+                    background-color: white;
                 }
             }
         }

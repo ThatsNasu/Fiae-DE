@@ -2,14 +2,14 @@
     class Category {
         private $id;
         private $parent;
-        private $value;
+        private $label;
         private $target;
         private $isUploadCategory;
 
-        public function __construct($id, $parent, $value, $target, $uploadCategory) {
+        public function __construct($id, $parent, $label, $target, $uploadCategory) {
             $this->id = $id;
             $this->parent = $parent;
-            $this->value = $value;
+            $this->label = $label;
             $this->target = $target;
             $this->uploadCategory = $uploadCategory;
         }
@@ -22,8 +22,8 @@
             return $this->parent;
         }
 
-        public function getValue() {
-            return $this->value;
+        public function getLabel() {
+            return $this->label;
         }
 
         public function getTarget() {
