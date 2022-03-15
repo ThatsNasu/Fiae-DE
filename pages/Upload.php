@@ -25,7 +25,7 @@
             <select name="category" required >
                 <?php
                     foreach($categories as $category) {
-                        if($category->isUploadCategory()) echo '<option value="'.$category->getID().'">'.$category->getValue().'</option>';
+                        if($category->isUploadCategory()) echo '<option value="'.$category->getID().'">'.$category->getLabel().'</option>';
                     }
                 ?>
             </select>
