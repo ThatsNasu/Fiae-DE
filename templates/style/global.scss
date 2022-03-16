@@ -56,9 +56,15 @@ header {
             display: inline-block;
             list-style: none;
             padding: 0;
-            li {
+            > li {
                 display: inline-block;
+                position: relative;
+                &:hover {
+                    background-color: var(--color-background-primary);
+                    color: var(--color-foreground-secondary);
+                }
                 a {
+                    display: inline-block;
                     padding: 5px 10px;
                     color: var(--color-foreground-primary);
                     text-decoration: none;
@@ -67,8 +73,31 @@ header {
                         color: var(--color-foreground-secondary);
                     }
                 }
-                ul {
+                > ul {
+                    background-color: var(--color-background-primary);
+                    box-shadow: 0px 0px 3px purple;
                     display: none;
+                    min-width: 180px;
+                    right: 0px;
+                    position: absolute;
+                    > li {
+                        display: block;
+                        a {
+                            display: block;
+                            text-align: right;
+                            &:hover {
+                                background-color: var(--color-background-secondary);
+                                color: var(--color-foreground-primary);
+                            }
+                        }
+                        &:hover {
+                            background-color: var(--color-background-secondary);
+                            color: var(--color-foreground-primary);
+                        }
+                    }
+                }
+                &:hover > ul {
+                    display: block;
                 }
             }
         }
@@ -79,6 +108,7 @@ content {
     padding: 10px;
     margin: 0px auto;
     min-height: calc(100vh - 50px - 160px);
+    min-height: calc(100vh - 50px - 146px);
     width: 1200px;
     @media (max-width: 1256px){
         width: 1000px;
