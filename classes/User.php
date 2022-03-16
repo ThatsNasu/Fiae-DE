@@ -6,6 +6,7 @@
         private $nickname;
         private $password;
         private $active;
+        private $permissions;
 
 
         public function __construct($dataset) {
@@ -15,6 +16,32 @@
             $this->nickname = $dataset['nickname'];
             $this->password = $dataset['password'];
             $this->active = $dataset['active'];
+            $this->permissions = array();
+
+            // REMOVE AFTER DEBUG
+            
+            $this->skills = array();
+        }
+        
+
+        // -------------------- METHODS --------------------
+        public function addSkill($skill) {
+            if(!in_array($skill, $this->skills)) array_push($this->skills, $skill);
+        }
+
+        public function addSkills($skills) {
+            foreach($skills as $skill) {
+                $this->addSkill($skill);
+            }
+        }
+
+        public function grantPermission($node) {
+            if(!in_array($node, $this->permissions)) array_push($this->permissions, $node);
+        }
+
+        public function getPermissionByNode($node) {
+            if(in_array($node, $this->permissions)) return true;
+            return false;
         }
 
         public function getUUID() {

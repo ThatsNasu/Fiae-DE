@@ -38,20 +38,6 @@
             return $stmt->execute(array($value, $userid));
         }
 
-        public function getPermission($node) {
-            $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM permissions WHERE node = ?");
-            $stmt->execute(array($node));
-            return $stmt->fetch();
-        }
-
-        public function getUserPermission($permissionid, $userid) {
-            $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM userpermissions WHERE permissionid = ? AND userid = ?");
-            $stmt->execute(array($permissionid, $userid));
-            return $stmt->fetch();
-        }
-
         public function getMenuEntries() {
             $this->connect();
             $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY target ASC");
@@ -131,6 +117,40 @@
             $stmt = $this->pdo->prepare("SELECT * FROM messagecaroussel ORDER BY id DESC LIMIT 5");
             $stmt->execute();
             return $stmt->fetchAll();
+        }
+
+        public function getPermissionNodes() {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM permissions ORDER BY node ASC");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
+        public function getUserPermissions($uuid) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("SELECT * FROM userpermissions WHERE userid = ?");
+            $stmt->execute(array($uuid));
+            return $stmt->fetchALL();
+        }
+
+        public function insertNewCategory($category) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("INSERT INTO navigation (parent, label, linksto, inMainNavigation, inFooter, isUploadCategory, requiresLogin) VALUES (:parent, :label, :linksto, :inMainNavigation, :inFooter, :isUploadCategory, :requiresLogin)");
+            $stmt->bindValue(':parent', $category->getParent(), PDO::PARAM_INT);
+            $stmt->bindValue(':label', $category->getLabel(), PDO::PARAM_STR);
+            $stmt->bindValue(':linksto', $category->getTarget(), PDO::PARAM_STR);
+            $stmt->bindValue(':inMainNavigation', $category->inMainNavigation(), PDO::PARAM_BOOL);
+            $stmt->bindValue(':inFooter', $category->inFooter(), PDO::PARAM_BOOL);
+            $stmt->bindValue(':isUploadCategory', $category->isUploadCategory(), PDO::PARAM_BOOL);
+            $stmt->bindValue(':requiresLogin', $category->requiresLogin(), PDO::PARAM_BOOL);
+            $stmt->execute();
+        }
+
+        public function deleteCategory($category) {
+            $this->connect();
+            $stmt = $this->pdo->prepare("DELETE FROM navigation WHERE id = :id");
+            $stmt->bindValue(':id', $category->getID());
+            $stmt->execute();
         }
     }
 ?>
