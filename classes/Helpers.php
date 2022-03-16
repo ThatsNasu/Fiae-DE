@@ -1,7 +1,7 @@
 <?php
     class Helpers {
 
-        public static function getcategoryByID($categoryID, $categories) {
+        public static function getCategoryByID($categoryID, $categories) {
             foreach($categories as $category) if($category->getID() == $categoryID) return $category;
         }
       
@@ -27,6 +27,10 @@
                 return explode('/', $_GET['url']);
             }
             return array();
+        }
+
+        public static function loadScript($path) {
+            return '<script src="/'.$path.'" type="text/javascript"></script>';
         }
     }
 ?>

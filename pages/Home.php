@@ -13,6 +13,20 @@
 
 <section>
     <article>
+        <div class="mainWrapper">
+            <div class="messageWrapper">
+                <?php
+                    $messages = $dbman->getCarousselMessages();
+                    foreach($messages as $message) {
+                        echo '<div class="messageCarousselElement">'.$message['value'].'</div>';
+                    }
+                ?>
+            </div>
+        </div>
+    </article>
+</section>
+<section>
+    <article>
         <?php
             if(Helpers::isLoggedIn()) {
                 echo 'Recent fileuploads:';
@@ -25,4 +39,12 @@
             }
         ?>
     </article>
+</section>
+<section>
+    News:
+    <?php
+        foreach($newsResult as $news) {
+            echo '<article class="news"><div class="newsContent">'.$news['content'].'</div><div class="newsRelease">'.$news['released'].'</div></article>';
+        }
+    ?>
 </section>
