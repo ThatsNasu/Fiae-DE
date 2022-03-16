@@ -16,7 +16,7 @@
     $categories = array();
     
     foreach($categoriesresult as $categoryresult) {
-        array_push($categories, new Category($categoryresult['id'], $categoryresult['parent'], $categoryresult['value'], $categoryresult['target'], $categoryresult['isUploadCategory']));
+        array_push($categories, new Category($categoryresult['id'], $categoryresult['parent'], $categoryresult['label'], $categoryresult['linksto'], $categoryresult['isUploadCategory']));
     }
 
 
@@ -30,10 +30,10 @@
             header('Expires: 0');
             header('Cache-Control: no-cache');
             header('Pragma: public');
-            header('Content-Length: '.$file['size']);
-            fpassthru(fopen($file['diskpath'].$file['filename'], 'rb'));
+            header('Content-Length: '.$file['filesize']);
+            fpassthru(fopen($base.Helpers::getFullPathByCategoryID($file['category'], $categories).'/'.$file['filename'], 'rb'));
             exit;
         }
-        echo 'file doesnt exist';
+        echo 'File not found on the server, or no permission to acces this file';
     }
 ?>

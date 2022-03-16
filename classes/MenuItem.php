@@ -3,18 +3,18 @@
     class MenuItem {
         private $id;
         private $parent;
-        private $value;
+        private $label;
         private $target;
         private $children;
         private $requiresLogin;
         private $navigationPositions;
 
-        public function __construct($id, $parent, $value, $target, $requiresLogin) {
+        public function __construct($id, $parent, $label, $target, $requiresLogin) {
             $this->children = array();
             $this->navigationPositions = array();
             $this->id = $id;
             $this->parent = $parent;
-            $this->value = $value;
+            $this->label = $label;
             $this->target = $target;
             $this->requiresLogin = $requiresLogin;
         }
@@ -32,7 +32,7 @@
         public function renderItem($navigationPosition, $parenttarget = '') {
             $tree = '';
             if(!in_array($navigationPosition, $this->navigationPositions)) return;
-            $tree .= '<li><a href="'.$parenttarget.$this->target.'">'.$this->value.'</a>';
+            $tree .= '<li><a href="'.$parenttarget.$this->target.'">'.$this->label.'</a>';
             $string = '';
             foreach($this->children as $child) {
                 $string .= $child->renderItem($navigationPosition, $parenttarget.$this->target);
@@ -51,8 +51,8 @@
             return $this->parent;
         }
         
-        public function getValue() {
-            return $this->value;
+        public function getLabel() {
+            return $this->label;
         }
 
         public function getTarget() {

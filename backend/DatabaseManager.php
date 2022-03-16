@@ -40,7 +40,7 @@
 
         public function getMenuEntries() {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY target ASC");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY linksto ASC");
             $stmt->execute(array());
             return $stmt->fetchAll();
         }
@@ -61,24 +61,24 @@
 
         public function getCategories() {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY value ASC");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation ORDER BY label ASC");
             $stmt->execute();
             return $stmt->fetchAll();
         }
 
         public function getCategoriesByParent($parent = '/') {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT id FROM navigation WHERE value = ?");
+            $stmt = $this->pdo->prepare("SELECT id FROM navigation WHERE label = ?");
             $stmt->execute(array($parent));
             $result = $stmt->fetch();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = ? ORDER BY value ASC");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE parent = ? ORDER BY label ASC");
             $stmt->execute(array($result['id']));
             return $stmt->fetchAll();
         }
 
         public function getCategoryByName($name = "Home") {
             $this->connect();
-            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE value = ?");
+            $stmt = $this->pdo->prepare("SELECT * FROM navigation WHERE label = ?");
             $stmt->execute(array($name));
             return $stmt->fetch();
         }

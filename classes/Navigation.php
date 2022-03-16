@@ -8,7 +8,7 @@
             $list = array();
             foreach($result as $row) {
                 if($loggedin >= $row['requiresLogin']) {
-                    $menuItem = new MenuItem($row['id'], $row['parent'], $row['value'], $row['target'], $row['requiresLogin']);
+                    $menuItem = new MenuItem($row['id'], $row['parent'], $row['label'], $row['linksto'], $row['requiresLogin']);
                     if($row['inMainNavigation']) $menuItem->addNavigationPosition('inMainNavigation');
                     if($row['inFooter']) $menuItem->addNavigationPosition('inFooter');
                     array_push($list, $menuItem);
