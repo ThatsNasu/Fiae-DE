@@ -143,14 +143,14 @@
             $stmt->bindValue(':inFooter', $category->inFooter(), PDO::PARAM_BOOL);
             $stmt->bindValue(':isUploadCategory', $category->isUploadCategory(), PDO::PARAM_BOOL);
             $stmt->bindValue(':requiresLogin', $category->requiresLogin(), PDO::PARAM_BOOL);
-            $stmt->execute();
+            return $stmt->execute();
         }
 
         public function deleteCategory($category) {
             $this->connect();
             $stmt = $this->pdo->prepare("DELETE FROM navigation WHERE id = :id");
             $stmt->bindValue(':id', $category->getID());
-            $stmt->execute();
+            return $stmt->execute();
         }
     }
 ?>
