@@ -12,7 +12,7 @@
             }
         }
     }
-    if(!Helpers::isLoggedIn()) {
+    if(Helpers::isLoggedIn()) return;
         ?>
         <section>
             <article>
@@ -23,7 +23,3 @@
                 </form>
             </article>
         </section>
-        <?php
-    }
-?>
-    
