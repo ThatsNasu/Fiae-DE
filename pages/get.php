@@ -9,7 +9,7 @@
         return;
     }
 
-    $base = '/mnt/pi4tb/FIAE-DE';
+    $base = '/mnt/external/FIAE-DE';
     $dbman = new DatabaseManager($host, $dbname, $login, $password);
 
     $categoriesresult = $dbman->getCategories();
