@@ -4,7 +4,7 @@
         require_once('pages/Login.php');
         return;
     }
-    $base = '/mnt/pi4tb/FIAE-DE';
+    $base = '/mnt/external/FIAE-DE';
     if(isset($_FILES['file']) && !empty($_FILES['file'])) {
         $filename = $_FILES['file']['name'];
         if(isset($_POST['filename']) && !empty($_POST['filename'])) $filename = $_POST['filename'].'.'.explode('.', $_FILES['file']['name'])[sizeof(explode('.', $_FILES['file']['name']))-1];
